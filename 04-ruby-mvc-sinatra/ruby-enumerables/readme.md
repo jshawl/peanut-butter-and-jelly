@@ -10,6 +10,8 @@ Enumerables are Ruby methods that use loops to interact with data collections in
 * But before we talk about enumerables, let's see how traditional loops work in Ruby...
 * You will use these!
 
+Q: What loops did we use in Javascript?
+
 #### While
 
 Like Javascript, runs the loop while a condition is true.
@@ -126,10 +128,10 @@ The king of enumerables, and the one you will most likely be using the most.
 If we were to emulate `.each` using plain ol' Ruby, it would look something like this...
 
 ```ruby
-# A loop that prints out each value in an array
+# A loop that prints out the doubled value of each item in an array
 numbers = [ 1, 2, 3, 4, 5 ]
 for number in numbers
-  puts number
+  puts number * 2
 end
 ```
 
@@ -138,12 +140,12 @@ But `.each` looks like this, using the code block format...
 ```ruby
 numbers = [ 1, 2, 3, 4, 5 ]
 numbers.each do |number|
-  puts number
+  puts number * 2
 end
 
 # Alternate syntax
 numbers = [ 1, 2, 3, 4, 5 ]
-numbers.each { |number| puts number }
+numbers.each { |number| puts number * 2 }
 ```
 
 ###### Code Block Format
@@ -154,7 +156,7 @@ Multi-line
 * `.each` - method name
 * `do` - keyword that begins block of code
 * `|number|` - iteration variable; represents an individual value in the array
-  - Can call this whatever you want. Should make it related to the collection in question.
+  - Common syntax is to name the variable the singular version of the collection. In this case, use `number` for `numbers`.
   - Some enumerables may have more than one of these.
 * `end` - closes code block
 
@@ -162,6 +164,17 @@ Single-line
 * `.each` - method name
 * { } - replaces `do` and `end`; contains the iteration variable and code block
 * `|number|` - iteration variable
+
+##### Mini-Exercise: Practice Each (10min)
+
+Use `each` to do the following...
+1. Print out the squared values for an array containing numbers.
+2. Print out the Celsius values for an array containing Fahrenheit values.
+* Insert more `each` applications here
+* Bonus: application that involves nested `each` loops
+
+Can I get a quick fist-of-five on how you feel about `each` and enumerables so far?
+* If you feel good about this then you'll have no problem taking on other enumerables. Even the crazy ones.
 
 ##### Map
 
@@ -226,6 +239,8 @@ Groups
 
 ### Homework Introduction (10min)
 
+[High Card](https://github.com/ga-dc/high_card)
+
 
 To Do
 - Sundae Shoppe Exercise
@@ -235,3 +250,28 @@ To Do
 - Where to introduce the notion of code blocks (after we see .each)?
 - Introduce the term "iteration variable"
 - Alternate formats for code blocks
+
+enumerables
+
+right now you can't control iteration variables (TIMES). soon you will (ENUMS).
+
+NEXT
+what numbers do you expect to see on the screen
+
+CHECKS FOR UNDERSTANDING
+
+
+EACH
+create mini-exercise just for each
+- and replicate for map
+- actually, maybe use F to C here
+- Fist of Five check for each afterwards
+
+
+show using an enumerable in a method
+
+Doc Dive
+- supporting instructors help out with the harder ones
+
+Enums over loops
+- Enums symbolize intent
