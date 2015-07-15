@@ -29,13 +29,10 @@ Server-side language
 
 ![Client-Server Model](http://i.imgur.com/AfiaMQP.png)
 
-* Ruby resides in and is processed by a webpage's server.
+Ruby resides in and is processed by a webpage's server.
 * It gathers information from the database, filters it using logic, and from that generates HTML.
-* That means you can look at or mess with a site's Ruby code as you did with Javascript.
-* We won't be including Ruby files in our HTML documents. You'll learn more about how everything we've learned so far comes together next week.
-
-Next week you'll dive into back-end web development and actually start retaining information in a database
-* Ruby will allow us to interact with that stored information and display it on the web.
+* That means you **cannot** look at or mess with a site's Ruby code as you did with Javascript.
+* We won't be including Ruby files in our HTML documents. You'll learn more about back-end development and how to connect everything together next week.
 
 #### What's Ruby like?
 
@@ -47,7 +44,7 @@ MINASWAN
 
 Ruby as a "natural" language
 * While it isn't exactly simple, a lot of its features are going to feel intuitive.  
-  * Matz: "Ruby is simple in appearance, but is very complex inside, just like our human body."
+* Matz: "Ruby is simple in appearance, but is very complex inside, just like our human body."
 
 
 #### Tools We'll Be Using
@@ -90,9 +87,11 @@ Although we don't use `var`, there is still syntax to designate whether a variab
 
 #### No Semicolons!
 
-Although your code will work if you close a line with `;`, common practice is not to use them.
+While your code will work if you close a line with `;`, common practice is not to use them.
 
 #### Parentheses Optional
+
+Since I'm in a Javascript state of mind, you will notice me using them pretty often.
 
 ```ruby
 number = 3
@@ -106,10 +105,6 @@ if( number == 3 )
 end
 # => "It's a 3!"
 ```
-
-You might notice me using and not-using them in similar situations.
-* Let me know if it's not clear whether you should use them or not.
-
 
 #### Puts and Gets
 
@@ -254,7 +249,7 @@ Truthiness and falsiness is a lot less complicated in Ruby.
 
 #### Symbols and (Im)mutability
 
-Symbols are immutable values. That means they contain the same value through the entirety of a program and cannot be change.
+Symbols are immutable values. That means they contain the same value through the entirety of a program and cannot be changed.
 * Kind of like a string that never changes.
 * Syntax: `variable_name = :symbol_name`
 * No Javascript equivalent.
@@ -294,7 +289,7 @@ When/why would you use symbols?
 
 ### More on Variables
 
-Symbols are a good segue into variables and how they work in terms of memory allocation.
+Symbols and data immutability are a good segue into talking more about variables and memory allocation in Ruby.
 
 Haha!
 
