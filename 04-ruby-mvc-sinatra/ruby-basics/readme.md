@@ -17,12 +17,12 @@
 * Use "!" to modify values in memory.
 
 
-### Intro
+### Intro (5min)
 
 HEADS UP: We are covering a lot of ground today. It's going to be a fast-paced class, so please raise your hand if I breeze over something quickly.
 * For small technical questions, please use Slack and one of the other instructors will help you out.
 
-#### What is Ruby?
+#### What is Ruby? (5min)
 
 Server-side language
 * Remember Robin's diagram from Week #1?
@@ -34,7 +34,7 @@ Ruby resides in and is processed by a webpage's server.
 * That means you **cannot** look at or mess with a site's Ruby code as you did with Javascript.
 * We won't be including Ruby files in our HTML documents. You'll learn more about back-end development and how to connect everything together next week.
 
-#### What's Ruby like?
+#### What's Ruby like? (5min)
 
 MINASWAN
 * Does anybody remember this from Allie's lunchtime presentation last Friday?
@@ -47,7 +47,7 @@ Ruby as a "natural" language
 * Matz: "Ruby is simple in appearance, but is very complex inside, just like our human body."
 
 
-#### Tools We'll Be Using
+#### Tools We'll Be Using (5min)
 
 We'll be running Ruby the same way we used Node to run Javascript during out first class.
 
@@ -66,7 +66,7 @@ The REPL: Pry
 
 ### Some Differences From Javascript
 
-#### Variables
+#### Variables (5min)
 
 No longer need to precede new variables with `var`. Just use the name of the variable!
 * Variables are instantiated as they are used.
@@ -106,7 +106,7 @@ end
 # => "It's a 3!"
 ```
 
-#### Puts and Gets
+#### Puts and Gets (5min)
 
 `puts` is the equivalent of Javascripts `console.log()`.
 
@@ -126,12 +126,12 @@ puts "How old are you?: "
 user_input = gets.chomp.to_i
 ```
 
-### Fundamental Data Types
+### Data Types
 
 **INSERT NOTE ABOUT EVERYTHING BEING AN OBJECT**
 **OBJECT DOESN'T MEAN WHAT IT DID IN JAVASCRIPT**
 
-#### Numbers
+#### Numbers (5min)
 
 Ruby uses same arithmetic operators as Javascript
 * `+`, `-`, `*`, `/`, `%`
@@ -156,7 +156,7 @@ Ruby uses same arithmetic operators as Javascript
 2 ** 4 = 16
 ```
 
-#### Strings
+#### Strings (10min)
 
 Words, just like in Javascript.
 * Surrounded by single or double-quotes
@@ -214,7 +214,7 @@ puts "I am teaching WDI #{class_number}"
 # => "I am teaching WDI 6"
 ```
 
-#### Nil
+#### Nil (5min)
 
 Ruby's "nothing".
 * The equivalent of Javascript's `null`.
@@ -234,7 +234,7 @@ something.nil?
 # => true
 ```
 
-#### Booleans
+#### Booleans (5min)
 
 Still `true` and `false`.
 * We'll be using them in conditionals and comparisons just like in Javascript.
@@ -247,7 +247,7 @@ Comparisons in Ruby are nearly identical to Javascript
 Truthiness and falsiness is a lot less complicated in Ruby.
 * The only "falsey" values are `nil` and `false`.
 
-#### Symbols and (Im)mutability
+#### Symbols and (Im)mutability (15min)
 
 Symbols are immutable values. That means they contain the same value through the entirety of a program and cannot be changed.
 * Kind of like a string that never changes.
@@ -287,7 +287,9 @@ When/why would you use symbols?
 * Often used as keys in objects (hashes). More on that later this class.
 * Enhance performance.
 
-### More on Variables
+### BREAK (10min)
+
+### More on Variables (10min)
 
 Symbols and data immutability are a good segue into talking more about variables and memory allocation in Ruby.
 
@@ -350,7 +352,7 @@ a
 
 ### Data Collections
 
-#### Arrays
+#### Arrays (10min)
 
 An ordered collection of related values. Same syntax as Javascript arrays.
 * Square brackets.
@@ -448,7 +450,7 @@ numbers.shuffle
 # => [ 4, 2, 1, 5, 3 ]
 ```
 
-#### Ranges
+#### Ranges (5min)
 
 Use ranges to quickly generate arrays of data types.
 * Parentheses.
@@ -465,7 +467,7 @@ Use ranges to quickly generate arrays of data types.
 ```
 
 
-#### Hashes (Objects)
+#### Hashes (Objects) (10min)
 
 A unordered, "dictionary-like" collection organized by key-value pairs. Very similar to Javascript objects, but with some differences.
 * Curly brackets
@@ -473,7 +475,8 @@ A unordered, "dictionary-like" collection organized by key-value pairs. Very sim
 
 Keys
 * Can be strings or symbols
-  - Symbols look a little different here. Flip it to symbol_name followed by `:`.
+  * Symbols look a little different here. Reverse notation of symbol_name followed by `:`
+  * Latest convention is to use symbols over strings. Both are OK though.
 
 
 ```ruby
@@ -546,8 +549,9 @@ peanut_butter.keys
 Combines two hashes.
 * Insert code example.
 
+### BREAK (10min)
 
-### Conditionals
+### Conditionals (10min)
 
 #### If-Else
 
@@ -593,7 +597,7 @@ else
 end
 ```
 
-### Methods
+### Methods (10min)
 
 The equivalent of Javascript "functions."
 * Many things are referred to as "methods" in Ruby. Right now, we'll be taking about methods that are not attached to an object (e.g., array, hash).
@@ -650,6 +654,10 @@ double
 ### Exercise: Temperature Converter (Ruby) (30min)
 
 [Temperature Converter (Ruby)](https://github.com/ga-dc/temperature_converter_ruby)
+
+** 195 MINUTES **
+* Continue exercise after break?
+* Move methods to enumerables?
 
 
 
