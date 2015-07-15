@@ -180,7 +180,8 @@ Single-line
 
 ##### Mini-Exercise: Practice Each (10min)
 
-Use `each` to do the following...
+Use `each` to do the following...  
+
 1. Print out the squared values for an array containing numbers.
 2. Print out the Celsius values for an array containing Fahrenheit values.
 * Insert more `each` applications here
