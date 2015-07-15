@@ -42,8 +42,8 @@ Next week you'll dive into back-end web development and actually start retaining
 MINASWAN
 * Does anybody remember this from Allie's lunchtime presentation last Friday?
   * "Matz Is Nice And So We Are Nice"
-  * Yukihiro Matsumoto ("Matz") created Ruby to increase developer happiness
-  * Mentality not only applies to how you should treat your fellow developers, but also the philosophy behind Ruby itself
+    * Mentality not only applies to how you should treat your fellow developers, but also the philosophy behind Ruby itself
+  * Yukihiro Matsumoto ("Matz") created Ruby to increase developer happiness.
 
 Ruby as a "natural" language
 * While it isn't exactly simple, a lot of its features are going to feel intuitive.  
@@ -131,7 +131,10 @@ puts "How old are you?: "
 user_input = gets.chomp.to_i
 ```
 
-### Primitive Data Types
+### Fundamental Data Types
+
+**INSERT NOTE ABOUT EVERYTHING BEING AN OBJECT**
+**OBJECT DOESN'T MEAN WHAT IT DID IN JAVASCRIPT**
 
 #### Numbers
 
@@ -199,6 +202,7 @@ puts "Hi my name is: " + my_name
 ```
 
 This works fine. Things aren't so simple when that variable is of a different data type. Like a number...
+* Q: What's going to happen when we run this line of code?
 
 ```ruby
 class_number = 6
@@ -368,8 +372,16 @@ These Javascript methods also exist in Ruby and are used the same way.
 numbers = [ 1, 2, 3, 4, 5 ]
 
 # Push
+numbers.push( 6 )
+# => [ 1, 2, 3, 4, 5, 6 ]
 
-#
+# Push (multiple elements)
+numbers.push( 7, 8, 9 )
+# => [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+# Pop
+numbers.pop
+# => [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 ```
 
 ###### Sort
@@ -390,6 +402,17 @@ numbers.sort
 numbers = [ 3, 1, 2, 2, 4 ]
 numbers.delete( 2 )
 # => [ 3, 1, 4, ]
+```
+
+###### Shuffle
+
+Q: Who has tried shuffling an array in this class already? What did you have to do?
+* BOOM! Ruby comes with a native array shuffling method.
+
+```ruby
+numbers = [ 1, 2, 3, 4, 5 ]
+numbers.shuffle
+# => [ 4, 2, 1, 5, 3 ]
 ```
 
 #### Ranges
@@ -416,8 +439,8 @@ A unordered, "dictionary-like" collection organized by key-value pairs. Very sim
 * Can use colons or "hash rockets" ( `=>` )
 
 Keys
-* Can be strings, symbols or integers
-  - Shouldn't use integers though...
+* Can be strings or symbols
+  - Symbols look a little different here. Flip it to symbol_name followed by `:`.
 
 
 ```ruby
@@ -427,7 +450,7 @@ peanut_butter = {
   "teacher" => "Adrian",
   "students" => [ "Donut", "Peter", "Nayana" ],
   "classroom" => 2,
-  "inSession?" => true,
+  "in_session" => true,
   "schedule" => {
                     "morning" => "Ruby Basics",
                     "afternoon" => "Enumeration"
@@ -439,7 +462,7 @@ peanut_butter = {
   teacher: "Adrian",
   students: [ "Donut", "Peter", "Nayana" ],
   classroom: 2,
-  inSession?: true,
+  in_session: true,
   schedule: {
               morning: "Ruby Basics",
               afternoon: "Enumerables"
@@ -457,6 +480,18 @@ peanut_butter["teacher"]
 # If your keys are symbols...
 peanut_butter[:teacher]
 # => "Adrian"
+```
+
+The same goes for modifying hash values.
+
+```ruby
+# String keys
+peanut_butter["teacher"] = "Andy"
+# => "Andy"
+
+# Symbol keys
+peanut_butter[:teacher] = "Andy"
+# => "Andy"
 ```
 
 ##### Hash Methods
@@ -578,12 +613,9 @@ double
 # => 10
 ```
 
-### Exercise: Temperature Converter w/ Conditionals (20min)
+### Exercise: Temperature Converter (Ruby) (20min)
 
-[Temperature Converter](https://github.com/ga-students/addbass-instructors/blob/master/w01/d02_ruby_basics/exercises/temp_converter.md)
-* CREATE NEW REPO.
-* Rebuild the temperature converter from our JS Basics class using Ruby. Must contain conditionals.
-* Bonus: Build into a function that takes a (1) starting numerical temperature value and (2) a starting temperature type (e.g., Fahrenheit).
+[Temperature Converter (Ruby)](https://github.com/ga-dc/temperature_converter_ruby)
 
 
 
@@ -591,7 +623,6 @@ double
 ## To-Dos
 * Collections
   - Time for: Combining/comparing? Documentation dive for methods?
-* Memory
 * How is the actual object ID generated?
 * Why do ranges work on letters?
 
