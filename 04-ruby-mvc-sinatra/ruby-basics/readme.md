@@ -221,7 +221,23 @@ puts "I am teaching WDI #{class_number}"
 
 #### Nil
 
-Ruby's "nothing"
+Ruby's "nothing".
+* The equivalent of Javascript's `null`.
+* You will usually see it when something does not have a return value (e.g., a `puts` statement).
+* Also like Javascript, `nil` is falsey.
+
+Can check if something is `nil` using `.nil?`
+* **NOTE:** Any method that ends with a `?` means it will return a boolean value.
+
+```ruby
+something = "A thing"
+something.nil?
+# => false
+
+something = nil
+something.nil?
+# => true
+```
 
 #### Booleans
 
@@ -332,6 +348,9 @@ a
 #### Exercise: Variable Assignment (20min)
 
 [Exercise: Variable Assignment](https://github.com/ga-students/addbass-instructors/blob/master/w01/d02_ruby_basics/exercises/variable_assignment.md)
+* Work in pairs and answer the questions in the link above.
+* **NO CODING ALLOWED!** Stretch those brain muscles and talk these out with your partner.
+* Writing these out on your table/whiteboard with markers is strongly encouraged.
 
 
 ### Data Collections
@@ -356,6 +375,25 @@ animals[0]
 animals[1] = "elephant"
 animals
 # => [ "dog", "elephant", "horse" ]
+```
+
+Another super cool Ruby feature is that you can perform arithmetic operations -- addition, subtraction, multiplication -- on arrays!
+
+```ruby
+numbers = [ 1, 2, 3 ]
+more_numbers = [ 4, 5, 6, ]
+
+# Addition
+lots_of_numbers = numbers + more_numbers
+# => [ 1, 2, 3, 4, 5, 6 ]
+
+# Subtraction
+lots_of_numbers - [ 4, 5, 6 ]
+# => [ 1, 2, 3 ]
+
+# Multiplication
+numbers * 3
+# => [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ]
 ```
 
 ##### Array Methods
@@ -575,19 +613,20 @@ Components
 # A method that doubles a number. A number-to-be-doubled is taken in as an argument.
 def double( number )
   doubled_number = number * 2
-  doubled_number
+  return doubled_number
 end
 ```
 
-You may notice that the above function does not use the word `return` on its last line. That's because Ruby methods have a feature called **implicit return**.
-* If you do not specify `return` anywhere in a method, it will automatically return the last line in the method.
-* We highly encourage you to include `return` -- i.e., use **explicit returns** -- in your methods and make clear what the output of your method is. Like so...
+You may have noticed that we use the same `return` notation as Javascript. This is called an **explicit return**, because we identify what exactly we want returned from the function.  
+
+Ruby also lets us make **implicit returns**. This means that when we do not use the `return` keyword, Ruby will automatically return the value of the last line of code in the method.
+* We encourage you to use **explicit returns** so we know exactly what your method is returning.
 
 ```ruby
 # A method that doubles a number. A number is taken in as an argument.
 def double( number )
   doubled_number = number * 2
-  return doubled_number
+  doubled_number
 end
 
 double( 3 )
@@ -613,7 +652,7 @@ double
 # => 10
 ```
 
-### Exercise: Temperature Converter (Ruby) (20min)
+### Exercise: Temperature Converter (Ruby) (30min)
 
 [Temperature Converter (Ruby)](https://github.com/ga-dc/temperature_converter_ruby)
 
@@ -621,8 +660,6 @@ double
 
 
 ## To-Dos
-* Collections
-  - Time for: Combining/comparing? Documentation dive for methods?
 * How is the actual object ID generated?
 * Why do ranges work on letters?
 
@@ -644,17 +681,9 @@ Ranges
 - How to check if something is in a range?
 - Use a variable as an endpoint for a range
 
-Hashes
-- Accessing hash values
-- Add `.keys` method
-- Remove `.each_pair`
-
 Methods
-- Flip returns. Explicit first, then implicit.
 - Change default value function to something that makes more sense
   - Days of vacation
 
-Temperature Converter
-- Have them put values in a hash
-
-Skim through Try Ruby, see what's covered
+How does something become nil?
+Resources say that nil is not like undefined.
