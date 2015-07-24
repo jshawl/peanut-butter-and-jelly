@@ -6,7 +6,7 @@
 * Run Ruby code by REPL (Pry/Irb) and file.
 * Identify specific differences between Ruby and Javascript in the following areas...
   - Syntax
-  - Variables, Scope
+  - Variables
   - Fundamental Data Types
   - Data Collections
   - Conditionals
@@ -81,8 +81,8 @@ my_favorite_animal = "flying squirrel"
 
 Although we don't use `var`, there is still syntax to designate whether a variable is local or global.
 * nothing implies `local` (e.g., `my_number`)
-* $ implies global (e.g., `$my_number`)
-* all-caps implies a constant (e.g., `PI = 3.14`)
+* $ makes it global (e.g., `$my_number`)
+* all-caps makes it a constant (e.g., `PI = 3.14`)
 
 
 #### No Semicolons!
@@ -95,12 +95,12 @@ Since I'm in a Javascript state of mind, you will notice me using them pretty of
 
 ```ruby
 number = 3
-if number == 3
-  puts "It's a 3!"
-end
-# => "It's a 3!"
-
 if( number == 3 )
+  puts( "It's a 3!" )
+end
+
+# => "It's a 3!"
+if number == 3
   puts "It's a 3!"
 end
 # => "It's a 3!"
@@ -128,8 +128,11 @@ user_input = gets.chomp.to_i
 
 ### Data Types
 
-**INSERT NOTE ABOUT EVERYTHING BEING AN OBJECT**
-**OBJECT DOESN'T MEAN WHAT IT DID IN JAVASCRIPT**
+Everything in Ruby is an **object**.
+* Not like a Javascript object -- those are called **hashes** in Ruby.
+* By "object" we mean that everything has its own set of properties and methods.
+  * Not a new concept. Some data types in Javascript had their own properties and methods (e.g., `string.length`).
+* Will learn more about this during your OOP class...
 
 #### Numbers (5min)
 
@@ -245,7 +248,20 @@ Comparisons in Ruby are nearly identical to Javascript
   - Don't worry about `===` in Ruby for now. It [does not](http://mauricio.github.io/2011/05/30/ruby-basics-equality-operators-ruby.html) have the same application as in Javascript.
 
 Truthiness and falsiness is a lot less complicated in Ruby.
-* The only "falsey" values are `nil` and `false`.
+* **BOARD:** What values were "falsey" in Javascript?
+  * `false`
+  * `0`
+  * `""`
+  * `null`
+  * `undefined`
+  * `NaN`
+* The only falsey values in Ruby are `nil` and `false`.
+
+### Exercise: Temperature Converter (Part I) (20min)
+
+[Temperature Converter (Ruby)](https://github.com/ga-dc/temperature_converter_ruby)
+
+### BREAK (10min)
 
 #### Symbols and (Im)mutability (15min)
 
@@ -266,7 +282,7 @@ other_favorite_animal = :killer_whale
 another_favorite_animal = :"flying squirrel"
 ```
 
-You can convert symbols to other data types.
+You can convert symbols to -- but not replace them with -- other data types.
 
 ```ruby
 # To string
@@ -275,7 +291,7 @@ favorite_animal.to_s
 # => "dog"
 ```
 
-You can't change a symbol's value though...
+You cannot change a symbol's value...
 
 ```ruby
 :dog = :bird
@@ -283,11 +299,9 @@ You can't change a symbol's value though...
 ```
 
 When/why would you use symbols?
-* Make sure values that need to be constant say constant.
+* Make sure values that need to be constant stay constant.
+* Enhance performance. Use less memory.
 * Often used as keys in objects (hashes). More on that later this class.
-* Enhance performance.
-
-### BREAK (10min)
 
 ### More on Variables (10min)
 
@@ -323,28 +337,28 @@ b.object_id
 Unlike symbols, other data types in Ruby are mutable.
 * We can not only change what values in memory variables are pointing to, but we can change those values in memory as well.
 
-Methods with an `!` attached to the end of them means that they will modify the object they are calling on.
+Methods with an `!` attached to the end of them usually means that they will modify the object they are calling on.
 * Things can get tricky when you have multiple variables pointing at the same value. For example...
 
 ```ruby
 # a points to a memory location containing 5
-a = "lowercase"
+a = "cheeseburger"
 
 # b now points to that same memory location
 b = a
 
-# Call upcase! (with a bang) on the value be is pointing to.
+# Call upcase! (with a bang) on the value b is pointing to.
 b.upcase!
-# => "LOWERCASE"
+# => "CHEESEBURGER"
 
 # That means a is now also pointing to the modified value.
 a
-# => "LOWERCASE"
+# => "CHEESEBURGER"
 ```
 
 #### Exercise: Variable Assignment (20min)
 
-[Exercise: Variable Assignment](https://github.com/ga-students/addbass-instructors/blob/master/w01/d02_ruby_basics/exercises/variable_assignment.md)
+[Exercise: Variable Assignment](https://gist.github.com/amaseda/35a62128d8795e045d49)
 * Work in pairs and answer the questions in the link above.
 * **NO CODING ALLOWED!** Stretch those brain muscles and talk these out with your partner.
 * Writing these out on your table/whiteboard with markers is strongly encouraged.
@@ -452,6 +466,8 @@ numbers.shuffle
 
 #### Ranges (5min)
 
+Don't have time to cover ranges, but read up on them on your own time. They may come in handy!
+
 Use ranges to quickly generate arrays of data types.
 * Parentheses.
 * Min and max value, separated by two periods.
@@ -547,7 +563,20 @@ peanut_butter.keys
 ##### Merge
 
 Combines two hashes.
-* Insert code example.
+
+```ruby
+classroom = {
+  room: "Peanut Butter"
+}
+
+squads = {
+  squad_one: "Elixir",
+  squad_two: "Fortran",
+  squad_three: "Ada"
+}
+
+updated_clasroom = classroom.merge( squads )
+```
 
 ### BREAK (10min)
 
@@ -577,6 +606,8 @@ end
 ```
 
 #### Case
+
+Don't have time to cover ranges, but read up on them on your own time. They may come in handy!
 
 Just like Javascript's `switch` statement. Here's an example that displays a certain greeting depending on a language input.
 * Note that the default case begins with `else`
@@ -651,42 +682,6 @@ double
 # => 10
 ```
 
-### Exercise: Temperature Converter (Ruby) (30min)
+### Exercise: Temperature Converter (Part II) (30min)
 
 [Temperature Converter (Ruby)](https://github.com/ga-dc/temperature_converter_ruby)
-
-** 195 MINUTES **
-* Continue exercise after break?
-* Move methods to enumerables?
-
-
-
-
-## To-Dos
-* How is the actual object ID generated?
-* Why do ranges work on letters?
-
-- truthy/falsey diagram for ruby (vs JS)
-
-Intro
-- Ruby created to increase developer happiness
-
-- bonus for variable assignment
-
-- figure out how/when to say that "everything is an object"
-
-Array methods
-- What would you like to see done to an array?
-- SHUFFLE
-- Subtract an array from an array
-
-Ranges
-- How to check if something is in a range?
-- Use a variable as an endpoint for a range
-
-Methods
-- Change default value function to something that makes more sense
-  - Days of vacation
-
-How does something become nil?
-Resources say that nil is not like undefined.
