@@ -19,6 +19,7 @@ To start, let's create a User model. It's going to be really simple, with just a
 ```
 rails generate migration create_users
 ```
+Is there starter code for this?
 ```
 # db/migrate/[timestamp]_users.db
 
@@ -33,6 +34,7 @@ end
 ```
 
 We'll talk about why this is `password_digest` instead of just `password` later.
+# awesome ^ was just wondering this!
 
 ```
 rake db:migrate
@@ -51,6 +53,13 @@ end
 
 #### What actions should a user have, to start off with?
 - To make things a little simpler, instead of having actions for signing up and signin in, we'll just have one: if someone tries to sign in with a username that doesn't exist, an account will be created for them.
+
+Can this be broken into a group of user stories? e.g.:
+
+- Users can type in a username
+- Users can type in a password
+- When they hit submit, show logged in as...
+
 - Also, we won't add in an "edit password" functionality yet.
 
 #### What kind of HTTP request should go to each action?
@@ -95,6 +104,7 @@ class UsersController < ApplicationController
     else
       if !User.find_by(username: params[:username])
         if User.create(
+	# or, #find_or_create_by - http://apidock.com/rails/v4.0.2/ActiveRecord/Relation/find_or_create_by
           username: params[:username],
           password_digest: params[:password]
         )
@@ -122,6 +132,8 @@ class UsersController < ApplicationController
   def signout
 
   end
+  # this is a lot of code - are people going to copy/paste?
+  # consider adding a few explicit steps
 end
 ```
 
@@ -152,6 +164,8 @@ Next, we'll create a sign-in form. The form will POST to that `/signin` route.
 ```
 
 ...and now if we run our application, we can see that it's working successfully!
+
+# would be nice to add a link to the solution to check their code against
 
 ## The Flash
 
@@ -184,12 +198,14 @@ Rails gives us a handy method for showing users error messages, called `flash`. 
 
 #### All the passwords are stored in the database as plain text. Why is that a problem?
 
+- could share http://plaintextoffenders.com/
+
 Most people use the same password for many sites. Anyone with access to the database could see people's passwords and easily try them out on other sites.
 
 ### Two truths and a lie:
 
 - Washington is an expensive city in which to live.
-- Jesse has nice hair.
+- Jesse has nice hair. #nervous! :)
 - It is possible to make something 100% secure.
 
 There is no such thing as a completely secure system. With enough time and effort, anything can be hacked.
@@ -217,6 +233,9 @@ If all you're protecting is a handful of e-mail addresses or comments on a minor
   - But what if someone figures out your encryption algorithm?
 
 Instead, we use **hashing**, which is like encryption but without the need to decrypt.
+# "without the need" feels like hashing is a more convenient decription.
+# consider fleshing this out a little more to talk about the differences:
+# e.g. Hashes are one way, Encryption is 2-way
 
 For example, take this number:
 
@@ -234,6 +253,8 @@ This is my password, encrypted with an algorithm. I'll give you some hints: my p
 - Because that's a really, really difficult calculation for any computer to make!
 
 So let's say instead of my password, the database stores this number, which is only about 260 bytes as a string. When I enter my password, my app takes whatever I entered to the 40th power. If it matches, even though it doesn't know my actual password, it knows I entered my password correctly. If what I entered is just one number off, the calculation's result will be completely different, and it won't match.
+
+# If your app can calculate this when it stores the password, it should be easy to crack, no? Consider showing - https://www.youtube.com/watch?v=b4b8ktEV4Bg
 
 This way, the only place my actual password is stored is in my own human memory.
 
@@ -266,6 +287,7 @@ If we run this multiple times, we get a different result each time:
 
 ```
 > BCrypt::Password.create("hello")
+# awesome to see Bcrypt used here!
 ```
 
 That's because to keep things *really* secure, BCrypt adds some random extra letters onto the end of the hash. These extra letters are called a **salt**. This process is **salting a hash**.
@@ -328,12 +350,14 @@ Rails provides a method called `has_secure_password` does... about what you woul
 - If you have a "type your password again to confirm it" field, it makes sure they match
 
 To use it, just add it to your User model in place of `validates :password`, etc.
+# we haven't taught validations yet...
 
 ```
 # app/models/user.rb
 
 class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
+  # same comment as above. this will be new
   has_secure_password
 end
 ```
@@ -362,6 +386,8 @@ Click around on the different "buttons" or "tabs". In particular, look at `dotco
 #### Turn and talk: What do you see? What do these do?
 
 A *cookie* is a piece of data stored on your computer by your web browser and associated with a particular website.
+
+# Love the deep dive here. lots of mechanics, but try to answer the "why" a little more.
 
 ### Example cookies:
 
@@ -455,6 +481,7 @@ def signin
 else
   message = "You're signed in, #{params[:username]}! :)"
   cookies[:username] = params[:username]
+  # what's the difference between a cookie and a session?
 end
 ...
 ```
@@ -583,6 +610,8 @@ Now let's modify the application layout accordingly. If the user isn't signed in
 ```
 
 ### Before actions
+
+-- This is a lot! I too think it's useful - just a lot of concepts coming in.
 
 We'll tighten up this app even more by making it so you can't see **anything** unless you've logged in.
 
