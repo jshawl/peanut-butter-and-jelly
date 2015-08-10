@@ -294,20 +294,56 @@ Let's take another look at our `index.html` in the browser.
 
 **Q:** How should we go about putting space between the sections of our site?
 * What CSS properties do we have at our disposal?
-* `margin` vs. `padding`: which one and why?
 
-Remember when we set `box-sizing: border-box` for our columns?
-* That made it so our width includes `padding`.
-* We can go ahead and add `padding` to our columns without having to adjust their `width`.
-  * If we added gutters using `margin`, we'd have to do some math.
+Let's give each of our columns a little bit of margin. That should put just enough space between them.
 
-///////////////
-- finish gutters
-  - figure out padding vs. margin
-- add exercise where students create their own grid structure
-  - ask them to match a particular website/format
-- front-end frameworks
-///////////////
+```css
+
+.column {
+  /* We don't want to add too much space, so 1% should be enough */
+  margin: 1%;
+
+  float: left;
+  position: relative;
+  border: 2px solid Tomato;
+  border-radius: 20px;
+  text-align: center;
+}
+
+```
+
+Let's see what our webpage looks like now...
+
+!["gutters pre width adjustment"](img/gutters-pre-width-adjustment.png)
+
+Ahh, what happened?
+* Our width calculations are messed up since we added a 1% margin to each column.
+* **Q:** How do we go about fixing this?
+* Let's adjust our widths...
+
+```css
+/* Since we added 1% margin to each column, we need to adjust our widths by -2% (1% on the left, 1% on the right). */
+
+.column-1 { width: 6.333%; }
+.column-2 { width: 14.66%; }
+.column-3 { width: 23%; }
+.column-4 { width: 31.33%; }
+.column-5 { width: 39.66%; }
+.column-6 { width: 48%; }
+.column-7 { width: 56.33%; }
+.column-8 { width: 64.66%; }
+.column-9 { width: 73%; }
+.column-10 { width: 81.33%; }
+.column-11 { width: 89.66%; }
+.column-12 { width: 98%; }
+```
+
+Did that work?
+
+!["gutters post width adjustment"](img/gutters-post-width-adjustment.png)
+
+Nice! Why did we have to do this? Didn't we set our `box-sizing` to `border-box` earlier in the class?
+* Yes, but that does include `margin`. Our CSS would have automatically adjustd for any changes to `border` or `padding`.
 
 ## Exercise: Build your own grid from scratch
 
@@ -320,9 +356,9 @@ Use what we have learned in-class so far to build a grid from scratch.
 **Q:** Did anybody use a CSS front-end framework for their project?
 
 **Q:** What is a CSS front-end framework?
-* Like a library, that it gives us a toolkit that we can use to streamline the front-end development process.
-* But it's a framework, so that means we need to follow a certain structure.
-  * **TODO:** What is that structure? Why is it not a library?
+* Like a library, in that it gives us a toolkit that we can use to streamline the front-end development process.
+* But it's a framework, so that means we need to follow a certain structure and name things a certain way.
+  * If you use Bootstrap but don't follow their protocol, Bootstrap styling won't work.
 
 There are tons of front-end frameworks out there -- like Bootstrap, Foundation, Material Design -- that incorporate grid systems.
 * They're not necessarily better. In fact, if you're only looking to implement a grid system and not any additional styling, you might be better off building a grid from scratch.
@@ -335,17 +371,19 @@ There are tons of front-end frameworks out there -- like Bootstrap, Foundation, 
 !["bootstrap grid table"](img/bootstrap-grid-table.png)
 
 Bootstrap uses a similar class selector syntax for columns as what we used in our from-scratch example.
-* `col-lg-6`
+* `col-md-6`
 * Begins with `col-` and ends with `-6`, the width of that column.
 * **Note:** You no longer need to use a `.column` class.
 * Bootstrap also helps out with responsive design and allows us to set multiple column widths depending on the user's device.
-  * In this example, `lg` stands for "large" and covers most laptops and desktops.
+  * In this example, `md` stands for "medium" and covers most laptops and desktops.
   * Don't worry about the other sizes for now. You'll learn about Responsive Web Design later this week.
 
-**EXERCISE:** Let's implement the grid you created in the last exercise using Bootstrap.
+### Exercise: Implement Bootstrap
+
+Let's implement the grid you created in the last exercise using Bootstrap.
   1. Link the Bootstrap stylesheet to your `index.html` file [using a CDN](http://getbootstrap.com/getting-started/).
   2. Implement the same grid from the last exercise using Bootstrap row and column class selectors.
-  3. If you finish early, feel free to experiment.
+  3. If you finish early, feel free to experiment with responsive column widths and/or add some additional styling to your page.
 
 ## Additional Reading
 
