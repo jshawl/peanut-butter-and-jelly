@@ -172,7 +172,7 @@ Right now, we can...
 We need to...
 * **Set column widths.** We don't necessarily want our column widths to be defined by their content.
 * **Define total width.** In any scenario, we want our total grid width to cover the entire page.
-* **Give everything some space.** Our grid will look better if we give our rows and columns some breathing room (i.e., `margin`)
+* **Give everything some space.** Our grid will look better if we give our rows and columns some breathing room.
 
 #### Create columns with specific widths
 
@@ -195,6 +195,11 @@ Most grids have a column size of 12.
 ```css
 /* style.css */
 
+/*
+  How do we get these percentages?
+  percentage = (n / 12) * 100
+*/
+
 .column-1 { width: 8.333%; }
 .column-2 { width: 16.66%; }
 .column-3 { width: 25%; }
@@ -209,14 +214,13 @@ Most grids have a column size of 12.
 .column-12 { width: 100%; }
 ```
 
-**TO DO:** Include other types of column syntax (e.g., col-2-3 = "two thirds")
-
 You don't have to use the same class selector syntax as the above example.
 * You can and should customize your grid to fit your own needs.
 * Ex. `.col-2-3` = a column that takes up 2/3 width of its parent container
 
 Let's apply these selectors to `index.html` in a way that resembles an actual website.
 * Note the addition of the `.header` `.middle` and `.footer` class selectors to our rows.
+* We'll also add some actual content to our columns.
 
 ```html
 <!-- index.html -->
@@ -260,15 +264,25 @@ Let's also add some styling that will help us visualize this better.
 }
 
 /* Let's give the sections of our site some width/height */
-.header .column,
-.footer .column {
+.header > .column,
+.footer > .column {
   height: 50px;
   line-height: 50px;
 }
 
-.middle .column {
+.middle > .column {
   height: 400px;
   line-height: 400px;
+}
+
+/* Let's tweak our faux nav menu so it doesn't look as terrible */
+.header ul {
+  margin: auto;
+}
+
+.header li {
+  display: inline-block;
+  list-style-type: none;
 }
 ```
 
@@ -314,11 +328,26 @@ There are tons of front-end frameworks out there -- like Bootstrap, Foundation, 
 * They're not necessarily better. In fact, if you're only looking to implement a grid system and not any additional styling, you might be better off building a grid from scratch.
 * Nevertheless, you will encounter these frameworks in the wild so let's get some experience with them.
 
+## Bootstrap
+
+[Bootstrap's got grids](http://getbootstrap.com/css/#grid).
+
+!["bootstrap grid table"](/img/bootstrap-grid-table.png)
+
+Bootstrap uses a similar class selector syntax for columns as what we used in our from-scratch example.
+* `col-lg-6`
+* Begins with `col-` and ends with `-6`, the width of that column.
+* **Note:** You no longer need to use a `.column` class.
+* Bootstrap also helps out with responsive design and allows us to set multiple column widths depending on the user's device.
+  * In this example, `lg` stands for "large" and covers most laptops and desktops.
+  * Don't worry about the other sizes for now. You'll learn about Responsive Web Design later this week.
+
 **EXERCISE:** Let's implement the grid you created in the last exercise using Bootstrap.
   1. Link the Bootstrap stylesheet to your `index.html` file [using a CDN](http://getbootstrap.com/getting-started/).
   2. Implement the same grid from the last exercise using Bootstrap row and column class selectors.
-  3. If you finish early, try adding some styling to your blog.
+  3. If you finish early, feel free to experiment.
 
 ## Additional Reading
 
 * [Learn Layout: Clearfix](http://learnlayout.com/clearfix.html)
+* [Bootstrap CSS Documentation](http://getbootstrap.com/css/)
