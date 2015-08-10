@@ -332,7 +332,7 @@ There are tons of front-end frameworks out there -- like Bootstrap, Foundation, 
 
 [Bootstrap's got grids](http://getbootstrap.com/css/#grid).
 
-!["bootstrap grid table"](/img/bootstrap-grid-table.png)
+!["bootstrap grid table"](img/bootstrap-grid-table.png)
 
 Bootstrap uses a similar class selector syntax for columns as what we used in our from-scratch example.
 * `col-lg-6`
