@@ -2,39 +2,48 @@
 
 One on ones are generally from 4:30pm to 5:30pm on Mondays, Wednesdays, and Thursdays.
 
-## Mon Jul 20
+## Mon Aug 3
 
-- Outcomes
+- n/a (Project week)
 
-## Tue Jul 21
+## Tue Aug 4
 
+- 09:00 Standup
+
+Project 2 Check-ins (one-on-one, beginning just after standup)
 - Laura N.
-- **Open Appointment Time**
-- Eddie P.
-
-## Wed Jul 22
-
 - Cheikh N.
 - Nicholas O.
-
-## Thur Jul 23
-
 - Malissa R.
+- Rosel P.
+- Eddie P.
+- Lon P.
+- Justin P.
 
-## Mon Jul 27
+## Wed Aug 5
+
+- n/a (Project week)
+
+## Thur Aug 6
+
+- n/a (Project week)
+
+---
+
+## Mon Aug 10
 
 - Rosel P.
 - **Open Appointment Time**
 
-## Tue Jul 28
+## Tue Aug 11
 
 - Outcomes
 
-## Wed Jul 28
+## Wed Aug 12
 
 - Eddie P.
 - Lon P.
 
-## Thur Jul 29
+## Thur Aug 13
 
 - Justin P.

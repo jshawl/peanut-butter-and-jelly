@@ -26,7 +26,7 @@ end
 ```rb
 class student
   attr_accessor :name, :age
-  def initialize name, age
+  def initialize( name, age )
     @name = name
     @age = age
   end
@@ -35,34 +35,36 @@ end
 
 ### Explain the difference between local, instance and class variables in Ruby.
 * **Local variables** are only accessible within the scope in which they are declared.
-* **Instance variables** are accessible anywhere within a particular instance.
-* **Class variables** are accessible by an entire class (i.e., across instances).
+* **Instance variables** are accessible anywhere within a particular instance, each instance gets it’s own ‘copy’ of the variable (i.e. each intstance can have unique values).
+* **Class variables** are accessible by an entire class (i.e., across instances). Only one copy, so any changes in its value is reflected in every instance. Note: These are rarely used.
 
-### Say we have a students table. How would I select the last_name of each student using SQL?*
+### Say we have a students table. How would I select the last_name of each student using SQL?
 
 `SELECT last_name FROM students;`
 
 ### List the 5 HTTP request methods. How do they relate to the 4 crud actions?
 
 ```rb
-# index = read
-get /students/ do
-end
+# Format: HTTP request method = CRUD action
 
-# show = read
-get /students/:id do
+# index = read
+get "/students/" do
 end
 
 # create = create
-post /students/ do
+post "/students/:id" do
 end
 
 # update = update
-post /students/:id do
+put "/students/:id" do
+end
+
+# update = update
+patch "/students/:id" do
 end
 
 # delete = destroy
-delete /students/:id do
+delete "/students/:id" do
 end
 ```
 
@@ -88,4 +90,7 @@ end
 
 ```rb
 Person.create( name: "Adrian", age: 28, gender: "male" )
+
+# We're actually passing in a hash here. In Ruby, the curly brackets are optional. Let's add them...
+Person.create({name: "Adrian", age: 28, gender: “male”})
 ```

@@ -1,32 +1,40 @@
-# One on One Schedule 
-One on ones are generally from 4:30pm to 5:30pm on Mondays, Wednesdays, and Thursdays.
+# Dart One on One Schedule
 
-## Tue Jul 21
+One on ones are generally from 4:30pm to 5:00pm on Mondays, Wednesdays, and Thursdays.
 
-* Melissa Steffan - 5:00
+## Mon Aug 10
 
-## Wed Jul 22
+- Lisa
 
-* Ksenia Coulter - 4:30
-* Yvonne Wang - 5:00
+## Wed Aug 12
 
-## Thur Jul 23
+- Arash
+- **Open Appointment Time**
 
-* Lisa Scott - 4:30
-* Leigh Varley - 5:00
+## Thur Aug 13
 
-## Friday Jul 24
+- Adrian
+- Melissa
 
-* Adrian Shepelavey - 4:00
-* Rachel Warren - 4:30
+## Fri Aug 14
 
-## Mon Jul 27
+- Leigh
 
-* Omari Mayers-Walker - 5:00
+-----
 
-## Thurs Jul 30
+## Mon Aug 17
 
-* Arash Shahry - 5:00
+- Omari
 
+## Wed Aug 19
 
+- Yvonne
+- Leigh
 
+## Thur Aug 20
+
+- Rachel
+
+## Fri Aug 21
+
+- Ksenia
