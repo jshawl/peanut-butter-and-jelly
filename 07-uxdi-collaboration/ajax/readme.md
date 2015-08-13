@@ -18,21 +18,28 @@ Turn and talk to you neighbor, why might synchronus programming not be effective
 
 We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute, in a callback.
 
+Let's look at google maps. How would this site work with things not happening asynchronously?
+
 ## `$.ajax`- JSON (10/25)
 
 For the first part of this lesson, we'll be using the [weather underground api](http://www.wunderground.com/weather/api/d/docs)
 
+## You do sign up and register for a key!
+You guys can signup and register for your very own key!
+
 So if we go to this link, and we go to the example in the middle of the page, we can see a url, something like: `http://api.wunderground.com/api/Your_Key/conditions/q/CA/San_Francisco.json`
 
-You guys can signup and register for your very own key! For now, let's just use mine: `http://api.wunderground.com/api/f28a93cae85945b6/conditions/q/CA/San_Francisco.json`
+Let go to this url `http://api.wunderground.com/api/f28a93cae85945b6/conditions/q/CA/San_Francisco.json`:
 
-Lets not go crazy and screw your instructor though, we only have a rate limit of 500!
+> replace my key with yours if you've registered and received a key
 
-So if you go to this URL, you'll see a really gigantic hash. It can be really intimidating at first. But let's just start clicking around till we find some information we might want to display.
+If you're using the key provided in the lesson plan, we only have a rate limit of 500 so please don't over use!
+
+So if you go to this URL, you'll see a really gigantic object(hash in ruby). It can be really intimidating at first. But let's just start clicking around till we find some information we might want to display.
 
 Turns out, we can actually access this json object using Javascript!
 
-> JSON stands for Javascript Object Notation. JSON can come in a bunch of different ways. But at the end of the day, it's just a hash.
+> JSON stands for Javascript Object Notation. JSON can come in a bunch of different ways. But at the end of the day, it's just an object(hash in ruby).
 
 ## `$.ajax` - get (25/50)
 The jquery library gives us access to this awesome thing called asynchronous javascript and xml(AJAX). With the help of AJAX we can do server side requests asynchronously on the client without having to send an actual browser request that reloads the page.
@@ -52,7 +59,7 @@ $ touch index.html
 $ touch script.js
 ```
 
-We're going to load of some bare bones content to load jquery and our scripty file in the `index.html`:
+We're going to load of some bare bones content to load jquery and our script file in the `index.html`:
 
 ```html
 <!DOCTYPE html>
@@ -99,6 +106,7 @@ $(document).ready(function(){
   })
 })
 ```
+> You'll notice there are 3 functions that are tacked onto the AJAX call. These are known as promises. What are promises? They're just callbacks that may or may not happen. A promise represents the future result of an asynchronous operation. In the `.done()` promise if that ajax is executed successfully, the block of code inside it will execute. In the `.fail()` promise, if that ajax is not executed successfully, the block of code inside it will execute. In the `.always()` promise, code block inside will always occur regardless of the ajax's success.
 
 > If we mess up the URL even by one character, it goes from being a success to a failure. SO be sure to make sure your end points are... on point!
 
@@ -132,7 +140,11 @@ We can drill through this response just like any other JS object.
 ## AJAX - CUD intro (5/75)
 So we've used AJAX to do an asynchronous `get` request to a third party API. But it wouldn't make sense for us to be able to do CUD functionality to that same site. They probably don't want anyone that's not a developer there to be able to update the weather however we want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
 
-It just so happens we've built a new Rails API (through matt's class) where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](#). We can now use `$.ajax()` to CRUD the models of our tunr app! Let's go ahead and create a new artists controller action and corresponding view: `test_ajax`
+It just so happens we've built a new Rails API (through matt's class) where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-dc/tunr_ajax).
+
+Once you've cloned the repo cd into it and run the commands  `$bundle install`, `$rake db:create`, `$rake db:migrate` and `$rake db:seed` in the terminal
+
+We can now use `$.ajax()` to CRUD the models of our tunr app! Let's go ahead and create a new artists controller action and corresponding view: `test_ajax`
 
 ## Setting up a view to test AJAX with (10/85)
 Let's update our routes in `config/routes.rb` for a new route to test all of our AJAX calls in:
@@ -151,10 +163,10 @@ end
 in `app/views/artists/test_ajax.html.erb`:
 
 ```html
-<div class="test_ajax_get">AJAX!</div>
-<div class="test_ajax_post">AJAX!</div>
-<div class="test_ajax_put">AJAX!</div>
-<div class="test_ajax_delete">AJAX!</div>
+<div class="test_ajax_get">AJAX GET!</div>
+<div class="test_ajax_post">AJAX POST!</div>
+<div class="test_ajax_put">AJAX PUT!</div>
+<div class="test_ajax_delete">AJAX DELETE!</div>
 ```
 
 We're just going to add a quick event listener to this div inside `app/assets/javascripts/application.js`:
@@ -172,7 +184,7 @@ Great, everything's working. Let's try doing a get request to our API like we di
 
 ```javascript
 $(document).ready(function(){
-  $(".test_ajax").on("click", function(){
+  $(".test_ajax_get").on("click", function(){
     $.ajax({
       type: 'GET',
       dataType: 'json',
@@ -186,9 +198,44 @@ $(document).ready(function(){
 })
 ```
 
-> If we drill through this response, we can see all of the artists that were seeded in the database.
+> If access the objects in this response, we can see all of the artists that were seeded in the database. Here in the done response I could display whatever i want from the response.
 
-## AJAX Post (10/100)
+## Setup for AJAX post (10/100)
+Lets update our view to include some input fields and all of our existing articles in `app/views/artists/test_ajax.html.erb`:
+
+```html
+<!-- div attached to event handler -->
+<div class="test_ajax_get">AJAX GET!!</div>
+
+<!-- form for ajax post and put request -->
+<label>Name:</label>
+<input class="name" type="text">
+<label>Photo_url:</label>
+<input class="photo_url" type="text">
+<label>Nationality:</label>
+<input class="nationality" type="text">
+
+<!-- divs attached to event handlers -->
+<div class="test_ajax_post">AJAX POST!!</div>
+<div class="test_ajax_put">AJAX PUT!!</div>
+<div class="test_ajax_delete">AJAX DELETE!!</div>
+
+<h1>Articles</h1>
+<ul class="articles">
+  <% @artists.each do |artist| %>
+    <li>
+      <a href="/artists/<%= artist.id %>">
+        <%= artist.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+```
+
+> We can see now that artists are in this view as well as some input fields to help us generate some artists
+
+## AJAX Post (10/110)
 Let's try and create an artist through AJAX. Let's update our `app/assets/javascripts/application.js`:
 
 ```javascript
@@ -206,15 +253,16 @@ $(".test_ajax_post").on("click", function(){
 })
 ```
 
-As you can see, every time I click on this button another artists get's generated.
+As you can see, every time I click on this button another artists get's generated. This is awesome, we can now create things in our database on the client side. But there's a problem here. We've hardcoded the attributes.
 
 We hardcoded some values here, but how might we be able to dynamically aquire data on the client side instead of hardcoding values? (ST-WG)
 
-## You do - Work in pairs (20/120)
-- create a inputs for new artists in `app/views/artists/test_ajax.html.erb`
-- use those DOM elements to dynamically create artists using AJAX
+## You do - Work in pairs (20/130)
+- use the input fields to dynamically generate artists on the client side
 
-## AJAX PUT (10/130)
+- BONUS - not only does it create on the client side, but it also changes in the view layer to reflect the update in the database. hint: check out the response!
+
+## AJAX PUT (10/140)
 Let's now update an existing artist by adding another ajax call to our next event listener:
 
 ```javascript
@@ -232,7 +280,9 @@ $(".test_ajax_put").on("click", function(){
 })
 ```
 
-## AJAX DELETE(10/140)
+> note this is really just to show you how put requests work, normally we would not hardcode the url. We'll get more into this during OOJS/front end frameworks. But think about how we could modify the DOM in order to effectively use AJAX put requests
+
+## AJAX DELETE(10/150)
 Let's update our JS for our final event listener to delete a record in our database through AJAX in `app/assets/javascripts/application.js`:
 
 ```javascript
@@ -242,7 +292,7 @@ $(".test_ajax_delete").on("click", function(){
     dataType: 'json',
     url: "http://localhost:3000/artists/9"
   }).done(function(response){
-    console.log("shiz got deleted")
+    console.log("DELETED")
     console.log(response)
   }).fail(function(){
     console.log("failed to delete")
@@ -250,4 +300,24 @@ $(".test_ajax_delete").on("click", function(){
 })
 ```
 
-## You do... more to follow
+> read above comments for ajax put
+
+### Bonus exercises for put and delete
+- create a button or link, when clicked creates in line editing for an artist
+- should then also create a button that submits an AJAX put request to update that artist in the database and change the view on the client side if need be
+- create a button or link for each artist that submits an AJAX delete request to delete an artist in the database, update the view in the client side accordingly.
+
+## You do! On your own time(Practice makes perfect:smile:)
+- Try the same thing with songs resources
+
+- Try and recreate these AJAX request on another app you've created like scribbler or your project. Be sure to make sure your controller actions repond to json.
+
+- Try and incorporate AJAX into your collaborative project /w UXDI!
+
+## Sample quiz questions
+
+1. Write an AJAX GET request to a known end point.
+
+2. How does a promise differ from a callback?
+
+3. Write an AJAX POST to create an object in a rails application.
