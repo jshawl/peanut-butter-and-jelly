@@ -124,11 +124,16 @@ Does any of it look familiar?
 * What similarities does it have with RSpec?
   * `describe`, `it`, `expect`
   * Fortunately, we get to work with the same testing language as we do in Ruby.
-* Ruby aside, does this Jasmine test remind you of anything from WDI weeks 1-2?
-  * Getting some strong callback vibes from this...
-  * That's because `describe` and `it` are just functions!
+* Look at them side-by-side...
 
-Let's break down the format of a test...
+![ruby js test side by side](img/ruby-js-side-by-side.png)
+
+Ruby aside, does this Jasmine test remind you of anything from WDI weeks 1-2?
+* Getting some strong callback vibes from this...
+* That's because `describe` and `it` are just functions!
+
+Let's break down the format of a test.
+* No need to code along here. We'll make our own tests later in this class.
 
 **1. Suite**
 
@@ -145,11 +150,35 @@ A "suite" is the highest-level container in our test file.
   * (1) The string is the name of what we are testing
   * (2) The function contains the actual tests
 
+We can use the `beforeEach` function inside our suite to instantiate a value before every test.
+* In this example, that value is a person object.
+* We'll practice this later.
+
+```js
+describe( "A person", function(){
+
+  beforeEach( function(){
+    var person = {
+      name: "Matt"
+    }
+  })
+
+  // Specs go here.
+})
+```
+
 **2. Spec**
 
 ```js
 describe( "A person", function(){
-  it( "can talk", function(){
+
+  beforeEach( function(){
+    var person = {
+      name: "Matt"
+    }
+  })
+
+  it( "should have a name", function(){
     // Expectations go here.
   })
 })
@@ -162,9 +191,16 @@ In the "spec," we target a specific part of the suite.
 
 ```js
 describe( "A person", function(){
-  it( "can talk", function(){
-    var words = Person.talk( "Hello!" );
-    expect( words ).toBe( "Hello!" );
+
+  beforeEach( function(){
+    var person = {
+      name: "Matt"
+    }
+  })
+
+  it( "should have a name", function(){
+    var name = person.name;
+    expect( name ).toBe( "Matt" );
   })
 })
 ```
