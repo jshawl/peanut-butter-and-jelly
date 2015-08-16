@@ -156,7 +156,7 @@ describe( "A person", function(){
 ```
 
 In the "spec," we target a specific part of the suite.
-* In the above example, we test if this Person object can talk (i.e., if some "talk" method works).
+* In the above example, we test if this Person object can talk (i.e., if some "talk" function works).
 
 **3. Expectations**
 
@@ -170,7 +170,7 @@ describe( "A person", function(){
 ```
 
 Expectations are the meat-and-potatoes of our tests.
-* Begins with code content. In this case, runs the function in question.
+* Begins with code content. In this case, runs the function in question and saves return value to a `words` variable.
 * Last line is the actual expectation.
   * Begins with `expect`. Takes one argument, the variable whose value we are testing.
   * Followed by a **matcher** (e.g., `toBe`), which tests the expectation in a particular way.
