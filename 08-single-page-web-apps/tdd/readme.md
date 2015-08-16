@@ -23,7 +23,9 @@ For those of you who answered no, why not?
 
 Why should we?
 * **Bug detection.** Quickly identify unanticipated errors.
+* **Code Quality.** Create standards for our code before writing it.
 * **Time.** Shorten development time through bug detection.
+* **Documentation.** Tests act as a documentation of sorts for how our code should work. Helpful to other developers and shareholders.
 * **Jobs.** Testing is a job requirement across the board.
 
 ## Everybody Does It (5 / 10)
@@ -99,9 +101,12 @@ Today we're diving into the world of Javascript testing.
 ## Behavior-Driven Development (5 / 25)
 
 What does "Behavior Driven Development" mean and how is it different from TDD?
-* BDD integrates Agile development into TDD
+* BDD integrates Agile development into TDD.
   * What is the purpose of the application? Who is invested in your application? What are your user stories?
   * Only create tests that contribute to that direction.
+* We've actually already been implementing it.
+  * Verbose test descriptions. Can be read in plain English.
+  * BDD is less concerned with granularity of our tests and more with the final outcome.
 * BDD is not defined by syntax. It's a process to simplify and refine the number of tests you are running.
 
 ## Meet Jasmine (10 / 35)
@@ -446,6 +451,7 @@ A cool Jasmine feature is that you can create a `SpecRunner.html` file to render
 
 ## Additional Reading
 
+* [Difference Between TDD and BDD](https://joshldavis.com/2013/05/27/difference-between-tdd-and-bdd/)
 * [Jasmine Documentation](http://jasmine.github.io/2.1/introduction.html)
-* [Testing AJAX Calls with Jasmine](http://jasmine.github.io/2.1/ajax.html).
 * [Creating Custom Matchers in Jasmine](http://jasmine.github.io/2.0/custom_matcher.html)
+* [Testing AJAX Calls with Jasmine](http://jasmine.github.io/2.1/ajax.html)
