@@ -130,7 +130,7 @@ Does any of it look familiar?
 
 Ruby aside, does this Jasmine test remind you of anything from WDI weeks 1-2?
 * Getting some strong callback vibes from this...
-* That's because `describe` and `it` are just functions!
+* That's because `describe`, `beforeEach` and `it` are just functions!
 
 Let's break down the format of a test.
 * No need to code along here. We'll make our own tests later in this class.
@@ -152,7 +152,6 @@ A "suite" is the highest-level container in our test file.
 
 We can use the `beforeEach` function inside our suite to instantiate a value before every test.
 * In this example, that value is a person object.
-* We'll practice this later.
 
 ```js
 describe( "A person", function(){
@@ -178,14 +177,14 @@ describe( "A person", function(){
     }
   })
 
-  it( "should have a name", function(){
+  it( "is named Matt", function(){
     // Expectations go here.
   })
 })
 ```
 
 In the "spec," we target a specific part of the suite.
-* In the above example, we test if this Person object can talk (i.e., if some "talk" function works).
+* In the above example, we test to see if this person is named Matt.
 
 **3. Expectations**
 
@@ -198,7 +197,7 @@ describe( "A person", function(){
     }
   })
 
-  it( "should have a name", function(){
+  it( "is named Matt", function(){
     var name = person.name;
     expect( name ).toBe( "Matt" );
   })
@@ -206,7 +205,7 @@ describe( "A person", function(){
 ```
 
 Expectations are the meat-and-potatoes of our tests.
-* Begins with code content. In this case, runs the function in question and saves return value to a `words` variable.
+* Begins with code content. In this case, saves the name of the person in question to a variable.
 * Last line is the actual expectation.
   * Begins with `expect`. Takes one argument, the variable whose value we are testing.
   * Followed by a **matcher** (e.g., `toBe`), which tests the expectation in a particular way.
