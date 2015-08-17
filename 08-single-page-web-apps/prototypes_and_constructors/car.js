@@ -68,3 +68,5 @@ Car.prototype.drive = function() {
 Car.prototype.refuel = function() {
   this.fuel = 100;
 }
+
+// this file is extremely helpful for comparing!!

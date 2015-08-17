@@ -9,6 +9,7 @@
 - Differentiate between `__proto__` and Animal.prototype
 - Diagram the relationship between an object, its constructor, and prototype
 - Use `Object.create` to create inheritance relationships
+  - could not find any reference to object.create in lesson. 
 - Compare / contrast classical and prototypal inheritance
 - Use the Chrome element inspector to traverse through the prototypal tree.
 
@@ -30,6 +31,9 @@ the external world.
 Suppose we were building a card game. We'd start by building a deck. What does
 the deck of cards look like? Perhaps:
 
+Maybe include just a little more framing here to indicate the why. i.e. we've been working
+with backend js, but our front is getting complicated quickly.
+
 ```js
 var deck = ["Ace of Spades", "2 of Diamonds", "Queen of Diamonds", ... ] // etc
 ```
@@ -46,6 +50,8 @@ if ( translate(card0) > translate(card1) ) {
   return "Player 2 wins!";
 }
 ```
+
+excellent example! would like to see the word "interface" in here some where.
 
 We've had to write a whole other global method just translate card faces into
 numerical values for comparison. You can see how this code is *proecdural*: we
@@ -148,7 +154,7 @@ they're supported by JS and we use the `new` keyword to use the constructor
 function.
 
 ```js
-function Person(initialName) {
+function Person(initialName) { // point out why this is capitalized
   this.name = initialName;
   this.species = "Homo Sapiens";
   this.speak = function() {return "Hello! I'm " + this.name};
@@ -232,6 +238,8 @@ To see an object's prototype, you can look at the `__proto__` property. It's
 generally not a good idea to change the prototype directly by assigning to the
 `__proto__` property.
 
+what is the difference between __proto__ and prototype?
+
 ### Exercise: Car Constructor with Prototypes
 
 Write a constructor function with prototypes for our cars.
@@ -241,3 +249,5 @@ See car.js for a solution.
 ## Exercise: Monkey
 
 Insert link to monkey OOP exercise (same as ruby, but in JS, with TDD).
+
+Can TDD be the same as Adrian's lesson re: Jasmine?
