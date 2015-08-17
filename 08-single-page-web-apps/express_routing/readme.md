@@ -11,6 +11,8 @@
 
 You visit a page.  You click a link.  You fill in a form and press submit.  These are all requests.  Requests that are directed to a server.  That server needs to know how to respond to that request.  We map the request to the appropriate "controller" via routing.  In development, we spend a lot of time and effort mapping one thing to another.
 
+Can you add a diagram here? What do we already know about routing from Rails and sinatra?
+
 ## Request methods (10 min)
 
 - http://expressjs.com/guide/routing.html
@@ -32,6 +34,7 @@ app.METHOD(path, [callback...], callback)
 https://github.com/ga-dc/song_routes_express
 
 Note: earlier reading did not discuss :id placeholders
+^^ maybe this can be a section on `req.params`?
 
 
 ## Other Request methods (15 min)
@@ -71,6 +74,8 @@ Cross cutting concerns.  Like authentication, authorization, and loading the par
 app.all('*', requireAuthentication, loadUser);
 ```
 
+^^ can you show this in a "we do"? i.e. create an `.all` method that finds a user based on session id.
+
 ## Route Paths (30 min)
 
 Back to the docs for [Routing Paths](http://expressjs.com/guide/routing.html#route-paths)
@@ -88,6 +93,7 @@ Back to the docs for [Routing Paths](http://expressjs.com/guide/routing.html#rou
 We are throwing these regular expressions at you again.  It's high time we shared a little about them.  Regular expressions are a specialized syntax for matching portions of text. In js and ruby, a RegEx is wrapped in forward slashes (`/expression/`).
 
 I am going to show you a few example in [Rubular](http://rubular.com), a Ruby regular expression editor.
+^^ what is special about ruby regular expressions? Does it matter language to language?
 
 Enter "a" as the regular expression and add some fruits to "Your test string".
 
@@ -134,6 +140,9 @@ That `res.json` looks handy.  THe link takes us to http://expressjs.com/4x/api.h
 
 Did we miss one or two?
 
+I think this is a good area to add in JSONP. it's an extra letter mechanically, but seems fitting here as we talk about the differences between
+json and html.
+
 ### res.redirect
 
 We used this in the first exercise.
@@ -153,6 +162,7 @@ Andy covered this.  It's used to render a view template with your chosen templat
 ## Exercise: The Bowling Game (45 min)
 
 https://github.com/ga-dc/bowling_game_express
+^^ will review this next to verify solution / check out readme.
 
 - At 10 min: You have reviewed the project.  Have a handle on dependencies and routes.  You've run "mocha -w" and you've seen that your app doesn't fare too well. :)  Working on "gutter game".
 - At 30 min: "gutter game", "single pin game", and "partial game, no closed frames" work.
@@ -163,6 +173,8 @@ https://github.com/ga-dc/bowling_game_express
 In order to simplify your index.js, you will find it helpful to extract your routes to separate files.
 
 ### I Do: Extract example Song's routes to a separate file
+
+// include framing that this is related to an upcoming homework assignment. (part 2)
 
 https://github.com/ga-dc/song_routes_express
 
@@ -210,3 +222,5 @@ Your index.js should shorten considerably.  Hopefully, letting you see more of t
 - http://expressjs.com/guide/routing.html
 - Really like the organization I see in [this tutorial](https://thewayofcode.wordpress.com/2013/04/21/how-to-build-and-test-rest-api-with-nodejs-express-mocha/)
 - Looking for more?  We recommend NodeSchool's [ExpressWorks](https://github.com/azat-co/expressworks)
+
+Can you include sample quiz questions here?
