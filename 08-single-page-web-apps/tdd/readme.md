@@ -12,9 +12,11 @@
 
 ## Do You Test? (5 / 5)
 
-[INSERT OPENING EXERCISE]
-[Think Pair Share?]
-[Opportuntity to get them coding early on?]
+**THINK-PAIR-SHARE**: We’ve already seen how to work with tests in ruby. To get us back in that mindset, spend the next few minutes to think-pair-share on:
+
+* Why test?
+* Why not test?
+* What problem does testing solve?
 
 For those of you who answered no, why not?
 * **Time.** It's a waste of my time and effort to test.
@@ -30,8 +32,8 @@ Why should we?
 
 ## Everybody Does It (5 / 10)
 
-[Find example of large Javascript framework that comes with test]
-[Run them in front of class. Highlight importance of tests in large, complex projects]
+Testing is essential when working on large, complex projects.
+* Take Ember.js for example. [If you look at the framework's repo](https://github.com/emberjs/ember.js#how-to-run-unit-tests), it comes packaged with a ton of tests.
 
 ## Test-Driven Development
 
@@ -48,13 +50,15 @@ Testing gives us more control over our code.
 * We anticipate our errors with tests.
 * We can't move forward with faulty code because these tests must pass.
 
+![tdd flowchart](img/tdd-flowchart.png)
+
 TDD step by step.
   1. **Think.** What do we want our code to do?
   2. **Write a test.** This test must fail. Why?
   3. **Run your test.** What do you see?
   4. **Write code.** How can we make this test pass?
   5. **Test passes.** All done, right?
-  6. **Repeat.**
+  6. **Refactor and Repeat.**
 
 ### Unit Testing (5 / 20)
 
@@ -90,6 +94,7 @@ describe Person do
       expect(@matt.name).to_not be_nil
     end
   end
+end
 ```
 
 ## Jasmine
@@ -108,6 +113,7 @@ What does "Behavior Driven Development" mean and how is it different from TDD?
   * Verbose test descriptions. Can be read in plain English.
   * BDD is less concerned with granularity of our tests and more with the final outcome.
 * BDD is not defined by syntax. It's a process to simplify and refine the number of tests you are running.
+* Make sure that the purpose of your application is reflected in your tests.
 
 ## Meet Jasmine (10 / 35)
 
@@ -128,7 +134,7 @@ describe("A suite is just a function", function() {
 Does any of it look familiar?
 * What similarities does it have with RSpec?
   * `describe`, `it`, `expect`
-  * Fortunately, we get to work with the same testing language as we do in Ruby.
+  * Fortunately, we get to work with the same testing syntax as we do in Ruby.
 * Look at them side-by-side...
 
 ![ruby js test side by side](img/ruby-js-side-by-side.png)
@@ -145,7 +151,7 @@ Let's break down the format of a test.
 ```js
 describe( "A person", function(){
   // Specs go here.
-})
+});
 ```
 
 A "suite" is the highest-level container in our test file.
@@ -155,20 +161,10 @@ A "suite" is the highest-level container in our test file.
   * (1) The string is the name of what we are testing
   * (2) The function contains the actual tests
 
-We can use the `beforeEach` function inside our suite to instantiate a value before every test.
-* In this example, that value is a person object.
-
 ```js
 describe( "A person", function(){
-
-  beforeEach( function(){
-    var person = {
-      name: "Matt"
-    }
-  })
-
   // Specs go here.
-})
+});
 ```
 
 **2. Spec**
@@ -176,37 +172,36 @@ describe( "A person", function(){
 ```js
 describe( "A person", function(){
 
-  beforeEach( function(){
-    var person = {
-      name: "Matt"
-    }
-  })
-
-  it( "is named Matt", function(){
+  it( "should be named Adrian", function(){
     // Expectations go here.
-  })
-})
+  });
+
+  it( "should be 28 years old", function(){
+    // Expectations go here.
+  });
+});
 ```
 
 In the "spec," we target a specific part of the suite.
-* In the above example, we test to see if this person is named Matt.
+* In the above example, we test to see if this person is named Adrian and is 28 years old.
 
 **3. Expectations**
 
 ```js
 describe( "A person", function(){
 
-  beforeEach( function(){
-    var person = {
-      name: "Matt"
-    }
-  })
-
-  it( "is named Matt", function(){
+  it( "is named Adrian", function(){
+    var person = { name: "Adrian", age: 28 };
     var name = person.name;
-    expect( name ).toBe( "Matt" );
-  })
-})
+    expect( name ).toBe( "Adrian" );
+  });
+
+  it( "should be 28 years old", function(){
+    var person = { name: "Adrian", age: 28 };
+    var age = person.age;
+    expect( age ).toBe( 28 );
+  });
+});
 ```
 
 Expectations are the meat-and-potatoes of our tests.
@@ -215,6 +210,33 @@ Expectations are the meat-and-potatoes of our tests.
   * Begins with `expect`. Takes one argument, the variable whose value we are testing.
   * Followed by a **matcher** (e.g., `toBe`), which tests the expectation in a particular way.
     * A full list of Jasmine's native matchers can be found [here](http://jasmine.github.io/edge/introduction.html#section-Expectations).
+
+**4. Refactor**
+
+Could we make our tests here DRYer?
+* We instantiate the `person` variable twice. Is there a function available that will let us do this once?
+
+```js
+describe( "A person", function(){
+
+  beforeEach( function(){
+    var person = {
+      name: "Adrian",
+      age: 28
+    };
+  });
+
+  it( "is named Adrian", function(){
+    var name = person.name;
+    expect( name ).toBe( "Adrian" );
+  });
+
+  it( "should be 28 years old", function(){
+    var age = person.age;
+    expect( age ).toBe( 28 );
+  });
+});
+```
 
 ## Getting Started
 
@@ -392,25 +414,18 @@ module.exports = {
     return ( minuend - subtrahend );
   },
 
-  multiply: function( multiplicand, multiplier ){
-    return ( multiplicand * multiplier );
-  },
-
-  divide: function( dividend, divisor ){
-    return ( dividend / divisor );
-  },
-
-  square: function( value ){
-    return ( value * value );
-  },
-
-  exponential: function( base, power ){
-    return Math.pow( base, power );
-  }
+  // The rest of your calculator functions go here.
 }
 ```
 
-## Render Test Results in the Browser (10 / 115)
+## Exercise (Cont.): Refactor Calculator as Object (5 / 110)
+
+Refactor your calculator.js file so that instead of writing out a bunch of `functionName.exports`, all of your functions are condensed into one Javascript object.
+* Set `module.exports` equal to that object.
+
+[Here's the calculator solution](https://github.com/ga-dc/jasmine-calculator) in case you need some guidance.
+
+## Render Test Results in the Browser (10 / 120)
 
 A cool Jasmine feature is that you can create a `SpecRunner.html` file to render test results in the browser.
 * Here's a [SpecRunner template](https://github.com/jasmine/jasmine/blob/master/grunt/templates/SpecRunner.html.jst). All you need to do is reference your own JS and spec files.
@@ -446,8 +461,13 @@ A cool Jasmine feature is that you can create a `SpecRunner.html` file to render
 
 [INSERT SCREENSHOT OF FUNCTIONING SPECRUNNER.HTML]
 
-## Break (10 / 125)
+## Break (10 / 130)
 
+## Exercise + Homework: Clock Hands (20 / 150)
+
+With the remaining time in class I'd like you to create this [Clock Hands angle calculator](https://github.com/ga-dc/sundial) using a TDD approach.
+* There is no single way to do this, so feel free to create whatever tests you would like.
+* While you're together, I encourage you to tackle this exercise pair-programming style. Have one person write the test and the other write the code to make it pass. Switch with each test.
 
 ## Additional Reading
 
