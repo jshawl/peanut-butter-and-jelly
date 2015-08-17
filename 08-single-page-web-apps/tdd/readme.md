@@ -1,7 +1,3 @@
-# TO-DO
-* Opening exercise
-* Create an example where making one test pass makes a previous one fail.
-
 ## Learning Objectives
 
 * Explain the purpose of TDD/BDD.
@@ -34,6 +30,7 @@ Why should we?
 
 Testing is essential when working on large, complex projects.
 * Take Ember.js for example. [If you look at the framework's repo](https://github.com/emberjs/ember.js#how-to-run-unit-tests), it comes packaged with a ton of tests.
+* So many moving parts. And so many people contributing to them. Can you imagine how crazy this would get without testing?
 
 ## Test-Driven Development
 
@@ -57,7 +54,7 @@ TDD step by step.
   2. **Write a test.** This test must fail. Why?
   3. **Run your test.** What do you see?
   4. **Write code.** How can we make this test pass?
-  5. **Test passes.** All done, right?
+  5. **Test passes.**
   6. **Refactor and Repeat.**
 
 ### Unit Testing (5 / 20)
