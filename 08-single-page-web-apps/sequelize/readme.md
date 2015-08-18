@@ -13,7 +13,12 @@
 - Map a directory / file structure conducive to DB modeling
 - Map Rails / ActiveRecord methods to Express / Sequelize methods
 
+## Opening Framing
+
+Can you include something about where we are and what the purpose of today is?
+
 ## Let's start at the end
+^^ I like this!
 
 Download [tunr_node_hbs](https://github.com/ga-dc/tunr_node_hbs).
 
@@ -44,8 +49,10 @@ I'd like you to take 5 minutes, with the people at your table, to just compare t
 ## Today's class...
 
 ...is going to be pretty much just exploring this app, paying special attention to how all the database stuff works.
+^^^ can we change the framing a little here? i.e. "Today we will explore a JavaScript ORM and learn how it works by comparing new conventions to what we already know".
+just something to increase the value of the class.
 
-In Rails and Sinatra, we use ActiveRecord to interact with the database. In Node, we use Sequelize.
+In Rails and Sinatra, we use ActiveRecord to interact with postgres. In Node, we use Sequelize.
 
 ##### What advantages does this app running in Express have over this app running in Sinatra?
 
@@ -59,9 +66,11 @@ But **you**, dear student, have a *tremendous* advantage in being able to make t
 
 ### Why not MongoDB?
 
+^^ I recommend framing this a little more as well: "Typically Node apps use a NoSQL database, like mongodb"
+
 Because Mongo isn't a relational database. It stores data as big blobs of JSON. That's useful if you want to mostly store huge chunks of data -- documents, images, and so on -- but we're much more concerned with small bits of data that we want to be able to relate to each other: Artists and Songs, Posts and Comments, and so on.
 
-Doing that is a sonic pain in Mongo. The general consensus among developers is that Mongo should be avoided.
+Doing that is a sonic pain in Mongo. The general consensus among developers is that Mongo is best used for non-relational data.
 
 Sequelize uses **Postgres** -- what we've been using -- which is really nice because it's familiar and we can still poke around in the database using `psql`.
 
@@ -80,6 +89,8 @@ But Sequelize has a really nice way of migrating the database that ActiveRecord 
 ##### What did you use in Rails to change the database?
 
 In Rails, to change the database we had to use `rake db:migrate`. Migrations with Sequelize are the same as they are in Rails: you generate a migration using `sequelize migrate:create`, it creates a file with a timestamp (a bunch of numbers) at the beginning, you run `sequelize db:migrate`, and it runs any migrations files that haven't been run yet.
+
+loving the comparing and contrasting here
 
 ### So we open the db/migrate.js file to see...
 
@@ -165,6 +176,8 @@ This is the innocent-looking entrance to what is called...
 
 ### Callback Hell
 
+ugh. callback hell is not a thing if you used named functions. Can we be less biased here?
+
 You wake up one day and find you have 47 nested callbacks, have to hit "tab" 47 times for each new line, and your wife has left you and your house has burned down.
 
 It makes no difference from a performance standpoint. It's *real nice* from a readability standpoint.
@@ -222,3 +235,6 @@ Next, we load the models.
 Then, we define the **associations** for the models. Note that I've arranged it this way so the associations are set up after the models have been loaded.
 
 Again, in Node you have to define your associations after all your models have been loaded. I can't put `Artist.hasMany(Song)` in my Artist model because if 
+
+Overall, I think the content and flow is good. love the comparison between express and sinatra. I recommend having more explicit you-do's
+focusing more on students self-teaching and exploring rather than you coding along the whole class.
