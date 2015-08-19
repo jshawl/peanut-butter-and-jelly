@@ -12,6 +12,8 @@ We've learned how to make web applications with RESTful routing. We've even lear
 
 I think instead, it would be great if we could take that ajax response, and encapsulate the information we want into JS objects on the client-side. Then with those objects we can render views utilizing view objects.
 
+maybe a recap here like "weve been doing a lot of procedural front end javascript". In the same way we used ruby classes to group functionality and separate concerns, we can do this with javascript objects
+
 > One thing to note about this class, and WDI as a whole. We teach you many many tools. You won't use every tool all the time, but start to identify good use cases for these tools. IE. if you were building a hole in the ground a foot deep, a back hoe might be a bit much and a shovel might do the trick. That said OOJS is not the end all be all of doing things on the front end.
 
 ## Goal
@@ -21,16 +23,19 @@ We want to be able to create these views strictly on the client-side. Minus the 
 ## Setup (10/20)
 The first thing we should do is fork/clone the [tunr repo here](https://github.com/ga-dc/tunr_node_oojs).
 
-Let's start by
+Let's start by installing dependencies and starting the server.
 
-Let's creating a couple of folders, setup our application that we forked/cloned and run our server.
+```bash
+$ npm install
+$ nodemon app.js
+```
+
+Let's create a couple of folders, setup our application that we forked/cloned and run our server.
 
 ```bash
 $ mkdir public/js
 $ mkdir public/js/models
 $ mkdir public/js/views
-$ npm install
-$ nodemon app.js
 ```
 
 If we go into our browser we can view all the endpoints and see that everythings responding to json. Take a look at `app.js`, `controllers/artists.js` and `controllers/artists.js` and you can see the different routes.
@@ -48,7 +53,7 @@ In `public/js/models/artist.js`:
 
 ```js
 var Artist = function(info){
-  var self = this;
+  var self = this; // do you need this?
   this.name = info.name;
   this.photoUrl = info.photoUrl;
   this.nationality = info.nationality;
@@ -69,7 +74,8 @@ var artist = new Artist()
 What gives? We haven't included the script file in our layout file. In `views/layout.hbs`:
 
 ```html
-<script src="js/models/artist.js"></script>
+<script src="/js/models/artist.js"></script>
+	     ^^ use absolute paths
 ```
 
 Lets try it again ....:
@@ -156,6 +162,9 @@ Sick, we now have access to our artists in our database on the  client side.
 ## Views - Artist (20/90)
 We have the ability to create objects in JS from the database on the client side. We need to additionally render views based on those models. Lets start by creating and editing `public/js/views/artistView.js`:
 
+Here is one of many ways to build views with JS objects.
+(maybe plug adrian teaching react on Friday?)
+
 ```js
 var ArtistView = function(artist){
   this.artist = artist;
@@ -180,7 +189,7 @@ Let's create some additional functionality for the ArtistView Object in `public/
 ArtistView.prototype ={
   render: function(){
     // we'll be adding event listeners later but will still need access to the Artist view in the event listener
-    var self = this;
+    var self = this; // do you need this line?
     // appending elements to the .$el property
     self.$el.append("<h3>" + artist.name + "</h3>");
     self.$el.append("<img class='artist-photo' src='" + artist.photoUrl + "'>");
@@ -198,7 +207,7 @@ Let's test this out in the console.
 
 ```
 var bluesTraveler = new Artist({name: "blues traveler", photoUrl: "someURL", nationality: "murica", id: 6})
-var bluesTravelerView = new Artist(bluesTraveler)
+var bluesTravelerView = new ArtistView(bluesTraveler) // ???
 bluesTravelerView.render()
 ```
 
@@ -261,12 +270,14 @@ The first thing we need is the ability to get our songs. Let's update our artist
 
 ```js
 Artist.prototype.fetchSongs = function(){
+  // is prototype mentioned before here? could be good to recap on what that means
   var url = "http://localhost:3000/artists/" + this.id + "/songs"
   var request = $.getJSON(url)
   .then(function(response){
     var songs = []
     for(var i = 0; i < response.length; i++){
       // TODO: should this be this.songs?
+      // no. this solution looks good!
       songs.push(new Song(response[i]))
     }
     return songs
@@ -279,6 +290,9 @@ Artist.prototype.fetchSongs = function(){
 ```
 
 > note the similarities between `.fetch()` and `.fetchSongs()`. Though there are many similarities, I want to note the differences. `.fetch()` is a class method which is called on the constructor function itself. `.fetchSongs` is an instance method and is available for each instance of the Artist constructor.
+
+why are there two? what does the .fetch() method do?
+
 
 So we're able to get the songs for each artist. Now we want the ability to generate a view for each song so we can append it to the artist.
 
@@ -318,8 +332,6 @@ render: function(){
   var songsDiv = self.$el.find("div.songs")
   showButton.on("click", function(){
     self.toggleSongs(songsDiv)
-
-
   })
 },
 
@@ -376,3 +388,6 @@ One last little detail we need to fix on the UI. The buttons text should change 
 
 ## You do - toggle the button! (10/150)
 Create an instance method inside the `ArtistView.prototype` object. This method should make it such that the buttons text changes dynamically depending on whether songs are showing or not.
+
+Overall lesson looks great! I recommend adding in bonus options for people and finding external
+sources to backup the content that you have here.
