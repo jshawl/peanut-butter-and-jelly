@@ -16,8 +16,13 @@ functionality for artists. This means we'll be able to Create, Edit/Update,
 and Destroy artists. We won't really be adding functionality to songs, given
 the time, but the same principles apply.
 
+maybe reframe the songs as a bonus? i.e. we'll be focusing on artists, but try songs as a bonus.
+
 Overall, our app has a couple of parts that work together to create that lovely
 Single Page App Experience (SPA® Experience) ;)
+
+A diagram here would be extremely helpful. In the last couple of one on ones
+people have been overwhelmed with files and where things go
 
 ### The Database
 
@@ -47,6 +52,8 @@ backend has a few parts:
 Our front-end code runs in the browser, and interfaces with the backend (over
 HTTP) to request or update data, and then render the appropriate HTML.
 
+is it worth pointing out that our front end could be a totally separate app?
+
 * `script.js` - this is the main file that waits for the page to finish loading,
   and then starts up our app. In this case, it fetches all artists, and then
   displays them.
@@ -66,7 +73,7 @@ going to have at the end of today in our views. The highlighted ones are the
 ones we'll be working on in this lesson.
 
 Take 5 minutes to talk with your partner about what you think each method is
-supposed to do.
+supposed to do and how it might work.
 
 #### Artist Model Methods
 ![artist model methods](images/artist_model_methods.png)
@@ -75,6 +82,8 @@ supposed to do.
 ![artist view methods](images/artist_view_methods.png)
 
 ## Editing Artists
+
+is there a solution already posted? could be useful to link to here so people can reference the complete version as we go through.
 
 Our first feature, editing, will be the most intense, so don't worry, it gets
 better after this!
@@ -142,6 +151,9 @@ artistEditTemplate: function(artist) {
 }
 ```
 
+bonus! use `history.pushState` to update the url and reflect what you're editing. You should be able to reload
+the page and go right back to the edit view
+
 #### Updating The El
 
 Now that we have the template, let's write our `renderEditForm` method:
@@ -206,6 +218,7 @@ updateArtist: function() {
   var self = this;
   var data = {  name:     $('input[name=name]').val(),
                 photoUrl: $('input[name=photoUrl]').val() };
+		can you use serialize here? $("form").serialize()
   self.artist.update(data);
 },
 ```
@@ -230,6 +243,7 @@ update: function(artistData) {
   var self = this;
 
   var url = "http://localhost:3000/artists/" + this.id;
+  is the http and port necessary here? just /artists/ would be easier to deploy.
   var request = $.ajax({
     url: url,
     method: "patch",
@@ -239,6 +253,7 @@ update: function(artistData) {
     function(updatedArtistInfo) {self.reload(updatedArtistInfo);}
   );
   return request;
+  // some recap of promises might be useful here
 },
 ```
 
@@ -256,6 +271,7 @@ each property on our artist model:
 reload: function(newData){
   for(var attrname in newData) {
     this[attrname] = newData[attrname];
+    or, self[attrname]?
   }
 }
 ```
@@ -271,7 +287,7 @@ updateArtist: function() {
     var self = this;
     var data = {  name:     $('input[name=name]').val(),
                   photoUrl: $('input[name=photoUrl]').val() };
-    self.artist.update(data).then(function() { self.render(); });
+    self.artist.update(data).then(self.render);
   },
 ```
 
@@ -280,6 +296,7 @@ method, we returned the jQuery promise object. In other words, updating an
 artist is inherently asyn, it may take a while, so the method lets us ask "when
 you're done updating, run this callback". In this case, the callback is to
 render the show view.
+oo nvm previous comment
 
 ## Deleting Artists (You Do in Groups of 2) (30 minutes)
 
@@ -311,9 +328,19 @@ Add a button next to each song. When the button is clicked, it should:
 1. Add an `audio` element tied to the song's `previewUrl`.
 2. Stop / Remove any other auido players on the page.
 
+### Update URL w/ history.pushState
+
+### CRUD songs
+
 ## Summary
 
 That's it... we've written our first full(ish)-featured single page app. Time to
 go relax at the SPA! ;)
 
 ![Relaxing Spa](http://barcelonasalon-spa.com/wp-content/uploads/2012/12/spa5.jpg)
+
+## Sample Quiz Questions
+
+Overall - lesson looks great! Are there any external links we can reference here?
+maybe things to google / checkout? Just trying to think about keeping faster people interested
+during code-along times.
