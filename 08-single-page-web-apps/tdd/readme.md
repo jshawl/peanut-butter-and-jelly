@@ -29,10 +29,14 @@ Why should we?
 * **Jobs.** Testing is a job requirement across the board.
 
 ## Everybody Does It (5 / 10)
+ha nice headline
 
 Testing is essential when working on large, complex projects.
 * Take Ember.js for example. [If you look at the framework's repo](https://github.com/emberjs/ember.js#how-to-run-unit-tests), it comes packaged with a ton of tests.
 * So many moving parts. And so many people contributing to them. Can you imagine how crazy this would get without testing?
+maybe include some stats here incase the live demo doesn't go as planned.
+e.g. it took 3.8 minutes to run 3,941 tests. This tests 943 files from 2031 contributors. 
+i made up this info but would be nice to see!
 
 ## Test-Driven Development
 
@@ -51,6 +55,8 @@ TDD step by step.
   4. **Write code.** How can we make this test pass?
   5. **Test passes.** Green light.
   6. **Refactor and Repeat.**
+
+red, green, refactor
 
 ### Unit Testing (5 / 20)
 
@@ -98,6 +104,7 @@ end
 Today we're diving into the world of Javascript testing.
 * One JS testing framework is Jasmine.
   * Not the only one. There's Mocha, QUnit and more...
+  ^^ can you provide links to these in case people want to explore?
 * It bills itself as a "Behavior Driven Development" framework...
 
 ## Behavior-Driven Development (5 / 25)
@@ -136,6 +143,8 @@ Does any of it look familiar?
 * Look at them side-by-side...
 
 ![ruby js test side by side](img/ruby-js-side-by-side.png)
+
+images are helpful! gonna do more of this in my lesson
 
 Ruby aside, does this Jasmine test remind you of anything from WDI weeks 1-2?
 * Getting some strong callback vibes from this...
@@ -196,6 +205,7 @@ describe( "A person", function(){
 
   it( "should be 28 years old", function(){
     var person = { name: "Adrian", age: 28 };
+    see how ^^ is repeated? this is a good candidate for beforeEach as you mentioned in your todo.
     var age = person.age;
     expect( age ).toBe( 28 );
   });
@@ -219,6 +229,7 @@ Could we make our tests here DRYer?
 ```js
 describe( "A person", function(){
 
+  oh nice!
   beforeEach( function(){
     var person = {
       name: "Adrian",
@@ -241,6 +252,10 @@ describe( "A person", function(){
 ## Getting Started
 
 First, we're going to install jasmine-node globally.
+
+wait, node? does it matter? are there differences between front end testing and back end testing w/ js?
+can you link to any articles on testint js opinions or "state of the industry" type things?
+
 * `$ npm install  -g jasmine-node`
 * Now we can use Jasmine across projects.
 
@@ -249,16 +264,19 @@ First, we're going to install jasmine-node globally.
 During this lesson we are going to write tests for and create a calculator application.
 * We're going to stick with Javascript here. No HTML/CSS at the moment.
 * This will involve some Node syntax beyond what you've already seen.
-* I'll try to explain as we go along, but don't worry understanding it 100% now. You'll learn more about Node as the week goes on.
 
 ## Let's get to work (20 / 55)
 
 ### Create your JS files.
 
 Switch into your in-class folder and create the following.
+make a directory first?
 * Our calculator: `$ touch calculator.js`
 * Our test folder: `$ mkdir spec`
 * Our test file: `$ touch spec/calculator-spec.js`
+
+actually, is there a repo for this? would be nice to reuse in the future
+as well as have a solution students can reference
 
 ### Create our first test.
 
@@ -330,6 +348,7 @@ Of course, it failed. Let's create that addition function.
 // calculator.js
 
 exports.add = function(){
+weve been using module.exports so far. be prepared to answer "what is the diff btwn module.exports and exports?"
 
 }
 ```
@@ -352,6 +371,7 @@ Let's run our test again.
 
 ### We Do: Let's do the same for subtract. (5 / 60)
 * Create the test - run your test - create the function - run your test.
+* Bonus: write a test for squaring a number
 
 ## Object-Oriented Javascript (5 / 65)
 
@@ -367,6 +387,7 @@ You've already spent some time this week stepping up your OOJS game.
 // calculator.js
 
 // Think of `module.exports` as a collection of `exports.functionName`'s.
+// oooo...
 // Here it's set to an object that contains all of our calculator functionality.
 // Imagine that `module.exports` was replaced with `var calculator`.
 
@@ -381,6 +402,7 @@ module.exports = {
 
   // The rest of your calculator methods go here.
 }
+// should we use a constructor function here to reflect recent knowledge on OOJS?
 ```
 
 ## Break (10 / 75)
@@ -398,13 +420,16 @@ Follow the same process and add some functionality to our calculator.
 Implement `beforeEach`.  
 
 Test and add some advanced functionality.
-* Factorial
+* Factorial - can you link to relevant wikipedia pages for more explanation/direction?
 * Logarithmic
 
 Test for error messages when your calculator makes an invalid operation.
 * For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
 
 ## Exercise (Cont.): Add Some Matchers (10 / 100)
+
+here feels like the best place to mention an async test. I recommend using settimeout,
+but if it feels forced here, i say leave it out.
 
 We've already played around with one matcher in our test expectations: `.toBe( )`
 * Implement the following functions using the indicated matchers...
@@ -413,6 +438,7 @@ We've already played around with one matcher in our test expectations: `.toBe( )
 * Need help? Look at the [Jasmine Documentation](http://jasmine.github.io/2.0/introduction.html#section-Matchers).
 
 [Here's the calculator solution](https://github.com/ga-dc/jasmine-calculator) in case you need some guidance.
+oh nice, maybe point this out earlier?
 
 ### Bonus
 
@@ -439,3 +465,5 @@ With the remaining time in class I'd like you to create this [Clock Hands angle 
 * [Jasmine Documentation](http://jasmine.github.io/2.1/introduction.html)
 * [Creating Custom Matchers in Jasmine](http://jasmine.github.io/2.0/custom_matcher.html)
 * [Testing AJAX Calls with Jasmine](http://jasmine.github.io/2.1/ajax.html)
+
+sample quiz questions?
