@@ -19,17 +19,25 @@ This week you were introduced to the Javascript MVC model.
   * What does "view" mean in Javascript? Compared to Rails?
   * Visual representations of our models - not the entire page.
 * ReactJS can coexist with Models and Controllers. The user can set those up however they see fit.
+* ReactJS can also work with other front end frameworks.
 
 # Housekeeping
 
 Clone [this repo](https://github.com/ga-dc/react-inclass).
+Maybe demo a solution here?
 * Contains a simple Express server that we'll use in today's class.
 * We need to include some React script files: `react.js` and `JSXTransformer.js`
   * Available as a download [here](http://facebook.github.io/react/downloads/react-0.11.2.zip).
-  * Or available via CDNs [here]().
+  * Or available via CDNs [here](https://cdnjs.com/libraries/react/).
 
 
 # Components
+
+There's actually a lot going on w/ web components in the industry right now:
+
+- https://developer.mozilla.org/en-US/docs/Web/Web_Components
+- https://css-tricks.com/modular-future-web-components/
+- https://www.polymer-project.org/1.0/
 
 ## Hello World: A Very Basic Component (10 / 20)
 
@@ -46,6 +54,9 @@ The basic unit you'll be working with in ReactJS is a component.
 
 What the hell is JSX?
 > JSX is a XML-like syntax extension to ECMAScript without any defined semantics.
+
+maybe mention here that is is possible to use React w/ native js, but jsx makes it easier to think
+about how our virtual dom will be structured
 
 The purpose of JSX will be more apparent as we start building out our application.
 * Just know for now that...
@@ -86,6 +97,7 @@ var Hello = React.createClass({
 })
 
 // Many tutorials will use React.renderComponent, which has been phased out
+// ^^ have you a source? a link to changelog would be cool
 React.render(
   <Hello />,
   document.getElementById( "container" )
@@ -93,6 +105,7 @@ React.render(
 ```
 
 `React.render` takes the Virtual DOM node created by `.createClass` and adds it to the actual DOM.
+wait what's a virtual dom? what does it do?
 * Takes two arguments...
   1. The component.
   2. The DOM element we want to append it to.
@@ -103,9 +116,11 @@ What language is `<Hello />` written in? **JSX.**
   * React can actually be run without JSX.
   * When we say `<Hello />`, in plain Javascript we are actually saying `React.DOM.div( null, "Hello world.")`
     * Basically, a string of React methods that create a virtual DOM node.
+    nice!
 
 Let's see what this looks like in the browser console...
 * [FIGURE THIS OUT]
+does this make sense here? React is all about the view layer. What would you wanna see in the console?
 
 ## Hello World: A Little Dynamic (10 / 30)
 
@@ -167,6 +182,7 @@ Let's have some practice creating a React component for scratch. How about a blo
   2. author
   3. body
   4. comments
+  using constructor functions
 * Render these properties using a Post component.
 * The HTML/CSS composition of your Post is up to you.
 
@@ -186,8 +202,10 @@ var post = new Post({
   title: "My First Post",
   author: "Adrian",
   body: "Check it out. This is the first post on my dope blog!",
-  comments: [ "First!", "Second!", "This blog sucks." ]
+  comments: [ "First!", "Second!", "This blog needs more animated gifs." ]
 });
+
+// oho wow, nice!
 
 // Define component (PostView)
 var PostView = React.createClass({
@@ -211,6 +229,7 @@ React.render(
     author={post.author}
     body={post.body}
     comment={post.comments[0]}
+    do you need quotes for each of these values? what if the {} value has a space in it?
   />,
   document.getElementById( "container" )
 );
@@ -260,6 +279,8 @@ var PostView = React.createClass({
         <p>{this.props.body}</p>
         <h3>Comments</h3>
           <CommentView commentBody={post.comments[0]}/>
+	  im not sure but is there a way to render all comments? in one line?
+	  https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
           <CommentView commentBody={post.comments[1]}/>
           <CommentView commentBody={post.comments[2]}/>
       </div>
@@ -319,6 +340,7 @@ var Hello = React.createClass({
 
         // We can reference state values just like props using `this.state.val`
         <p>It is {this.state.date}</p>
+	// whats the difference between this.props and this.state?
       </div>
     );
   }
@@ -370,6 +392,7 @@ React.render(
 
 Whenever we run `.setState`, our component "diff's" the current DOM, and compares the Virtual DOM node with the updated state to the current DOM.
 * Only replaces the current DOM with parts that have changed.
+  ^^ can you add this explanation above as well when you mention virtual dom?
 
 ## Exercise: Implement State (10 / 95)
 
@@ -381,6 +404,10 @@ Let's create a state for our earlier blog example. We want to be able to edit th
 3. Create a button that triggers the above function.
 
 ### Solution
+
+I recommend taking the solution out of the readme, and linking to it: 
+https://github.com/ga-dc/react-inclass
+^^ noticed there's no solution branch. let me know if you want help!
 
 ```js
 var Post = function( info ){
@@ -419,6 +446,7 @@ var PostView = React.createClass({
         <p>{this.state.body}</p>
         <button onClick={ this.editPost }>Edit Post</button>
         <h3>Comments</h3>
+	  // should render however many comments there are
           <CommentView commentBody={post.comments[0]}/>
           <CommentView commentBody={post.comments[1]}/>
           <CommentView commentBody={post.comments[2]}/>
@@ -453,11 +481,20 @@ Having learned the basics of React, what are some benefits to using it vs. a dif
 
 # TO DO
 * Is there a difference between the two renders?
+  - whachu mean?
 * Why don't you need to include the nested component in `React.render`?
+ - the component has the nested component defined in it. 
+ https://facebook.github.io/react/docs/multiple-components.html#children
 * Can you only set a state value to a component property value?
+  <SomeComponent someAttribute={this.state...?}>
 * What is the obvious benefit(s) of React?
   - Clear HTML structure of rendered components.
   - Nicely compartmentalized properties via props and state.
   - Easily pass in values from model to view.
+  - 2 way data-binding
 * Is it okay if I sum up the magic of React using some 3rd party example in the end?
+  - not sure what you mean.
+  - maybe a demo of some performance thing?
 * Time / possible to incorporate form into example?
+ - this would be cool! maybe a bonus w/ external links?
+ -
