@@ -1,21 +1,15 @@
 ## Learning Objectives
 
-* Explain the purpose of TDD/BDD.
-<<<<<<< HEAD
-* Review RSpec and test syntax.
+* Explain the methodology behind Test Driven Development (TDD).
+* Review RSpec and general testing syntax.
 * Describe Jasmine.
-* Compare/Contrast Jasmine & RSpec.
-* Setup Jasmine for a Node Project.
-=======
-* Review RSpec and standard testing syntax.
-* Describe Jasmine.
-* Compare/Contrast Jasmine & RSpec.
+* List components of a Jasmine test.
 * Implement TDD using Jasmine.
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
+* Use different Jasmine matchers.
 
 ## Do You Test? (5 / 5)
 
-**THINK-PAIR-SHARE**: We’ve already seen how to work with tests in ruby. To get us back in that mindset, spend the next few minutes to think-pair-share on:
+**THINK-PAIR-SHARE**: We’ve already applied Test Driven Development to Ruby. To get us back in that mindset, spend the next few minutes to think-pair-share on:
 
 * Why test?
 * Why not test?
@@ -41,40 +35,29 @@ Testing is essential when working on large, complex projects.
 
 ## Test-Driven Development
 
-### Remember RSpec?
-
-We've already encountered TDD once with RSpec. What's RSpec?
-* Ruby framework.
-* Domain-specific language (DSL) for testing Ruby code.
-* We didn't get around to it in class but it can integrate with Rails.
-
 ### The Process (5 / 15)
-
-Testing gives us more control over our code.
-* We anticipate our errors with tests.
-* We can't move forward with faulty code because these tests must pass.
 
 ![tdd flowchart](img/tdd-flowchart.png)
 
 TDD step by step.
   1. **Think.** What do we want our code to do?
   2. **Write a test.** This test must fail. Why?
-  3. **Run your test.** What do you see?
+  3. **Run your test.** Seeing red.
   4. **Write code.** How can we make this test pass?
-  5. **Test passes.**
+  5. **Test passes.** Green light.
   6. **Refactor and Repeat.**
 
 ### Unit Testing (5 / 20)
 
-A way to test the most basic component of a program. In our RSpec lesson, this was a class.
+We've already encountered TDD once with RSpec. Back then, we engaged in "Unit Testing."
+* Addresses the **what** of testing, while TDD covers the **when** and **why**.
+* Test the most basic component of an application. Not necessarily the smallest.
 
 Here's a sample from Matt's lesson, in which we tested the functionality of a Person class.
-* What's the purpose of this chunk of code?
-* What does the syntax mean?
-  * `describe`
-  * `before`
-  * `expect`
-  * `.to`, `.to_not`
+* In particular the Person class' constructor method.
+* In a Unit test we can test any facet of a person.
+  * In can be a property (e.g., does this person have a name?)
+  * It can be a method (e.g., can this person talk?)
 
 ```ruby
 # Let's test the Person class.
@@ -101,23 +84,27 @@ describe Person do
 end
 ```
 
+We'll be doing this again when testing Javascript.
+
 ## Jasmine
 
 Today we're diving into the world of Javascript testing.
-* One (but not the only) JS testing framework is Jasmine.
+* One JS testing framework is Jasmine.
+  * Not the only one. There's [Mocha](https://mochajs.org/), [QUnit](https://qunitjs.com/) and more...
 * It bills itself as a "Behavior Driven Development" framework...
 
 ## Behavior-Driven Development (5 / 25)
 
 What does "Behavior Driven Development" mean and how is it different from TDD?
-* BDD integrates Agile development into TDD.
-  * What is the purpose of the application? Who is invested in your application? What are your user stories?
-  * Only create tests that contribute to that direction.
-* We've actually already been implementing it.
+* BDD informs **which** tests we should be running.
+  * What is the purpose of your application? What are your user stories?
+  * Make sure that your tests reflect the direction and purpose of your application.
+  * BDD is less concerned with the granularity of your tests and more with whether they test the key functionality of your application.
+* BDD is not defined by what functions or keywords you use to test your code.
+  * It's a process to simplify and refine the number of tests you are running.
+* We've already started implementing it.
   * Verbose test descriptions. Can be read in plain English.
-  * BDD is less concerned with granularity of our tests and more with the final outcome.
-* BDD is not defined by syntax. It's a process to simplify and refine the number of tests you are running.
-* Make sure that the purpose of your application is reflected in your tests.
+  * In today's in-class example, we'll be creating a basic Calculator application and testing its key features.
 
 ## Meet Jasmine (10 / 35)
 
@@ -213,11 +200,13 @@ Expectations are the meat-and-potatoes of our tests.
 * Last line is the actual expectation.
   * Begins with `expect`. Takes one argument, the variable whose value we are testing.
   * Followed by a **matcher** (e.g., `toBe`), which tests the expectation in a particular way.
+    * `toBe` isn't Jasmine's only matcher. Along with equality you can check for greater/less than, null and more.
     * A full list of Jasmine's native matchers can be found [here](http://jasmine.github.io/edge/introduction.html#section-Expectations).
+    * If you're feeling adventurous, you can even [create your own custom matcher](http://jasmine.github.io/2.0/custom_matcher.html).
 
 **4. Refactor**
 
-Could we make our tests here DRYer?
+Could we make these tests DRYer?
 * We instantiate the `person` variable twice. Is there a function available that will let us do this once?
 
 ```js
@@ -245,23 +234,13 @@ describe( "A person", function(){
 ## Getting Started
 
 First, we're going to install jasmine-node globally.
-<<<<<<< HEAD
-* `$ npm install jasmine-node -g`
-=======
 * `$ npm install  -g jasmine-node`
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 * Now we can use Jasmine across projects.
 
 ## What are we going to test?
 
 During this lesson we are going to write tests for and create a calculator application.
 * We're going to stick with Javascript here. No HTML/CSS at the moment.
-<<<<<<< HEAD
-* We're going to write this using Node, so you're going to see some unfamiliar syntax.
-=======
-* This will involve some Node syntax beyond what you've already seen.
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
-* I'll try to explain as we go along, but don't worry understanding it 100% now. You'll learn more about Node as the week goes on.
 
 ## Let's get to work (20 / 55)
 
@@ -293,9 +272,13 @@ Let's break this test down according to its parts. First, **the suite**.
 ```js
 var calculator = require( "../calculator" )
 
-describe( "addition", function(){
-  // Tests for our addition function will go in here.
-});
+describe( "a calculator", function(){
+
+  describe( "addition method", function(){
+    // Tests for our addition function will go in here.
+  });
+
+})
 ```
 
 Next up, let's make **a spec**.
@@ -305,8 +288,8 @@ Next up, let's make **a spec**.
 ```js
 var calculator = require( "../calculator" )
 
-describe( "addition", function(){
-  it( "should add 2 and 2", function(){
+describe( "addition method", function(){
+  it( "should add two numbers", function(){
     // Expectations go in here.
   })
 });
@@ -318,8 +301,8 @@ And finally, let's create **the expectations** for our test.
 ```js
 var calculator = require( "../calculator" )
 
-describe( "addition", function(){
-  it( "should add 2 and 2", function(){
+describe( "addition method", function(){
+  it( "should add two numbers", function(){
     // Let's store the sum of our addition function.
     // Because our add function will be stored in calculator.js, we can reference it as such...
     var sum = calculator.add( 2, 2 );
@@ -346,8 +329,7 @@ exports.add = function(){
 }
 ```
 
-Wait, what in the world is `exports`?!
-* Our first dose of Node syntax. Don't worry, though, it's pretty straightforward.
+`exports`? What's that?
 * With `exports` we can, well, "export" `add` or any other function in `calculator.js` to another javascript file.
   * Say we had an `accounting.js` file. We could give it full calculator functionality by `require`ing `calculator.js`.
 
@@ -366,60 +348,16 @@ Let's run our test again.
 ### We Do: Let's do the same for subtract. (5 / 60)
 * Create the test - run your test - create the function - run your test.
 
-## Break (10 / 70)
+## Object-Oriented Javascript (5 / 65)
 
-## Exercise: Build Out Our Calculator (15 / 85)
-
-Follow the same process and add some functionality to our calculator.
-  1. Multiplication
-    * Include a spec for multiplying by 0.
-  2. Division
-    * Include a spec for dividing by 0.
-  3. Square
-  4. Exponential
-
-### Bonus
-<<<<<<< HEAD
-Test for error messages when your calculator makes an invalid operation.
-* For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
-=======
-Make us of `beforeEach`  
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
-
-Test and add some advanced functionality.
-* Average
-* Factorial
-* Logarithmic
-
-<<<<<<< HEAD
-=======
-Test for error messages when your calculator makes an invalid operation.
-* For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
-
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
-## Exercise (Cont.): Add Some Matchers (10 / 95)
-
-We've already played around with one matcher in our test expectations: `.toBe( )`
-* Jasmine comes with a number of native matchers
-* Incorporate the following matchers into your calculator.
-  * `.toBeGreaterThan()` and `.toBeLessThan()`
-  * `.toBeNull()`
-  * `.toContain()`
-  * `.not.` (matcher prefix)
-* You can use these inside your already-existing specs or create brand new functions to test.
-* Need help? Look at the [Jasmine Documentation](http://jasmine.github.io/2.0/introduction.html#section-Matchers).
-
-### Bonus
-
-* Incorporate the `.toMatch()` matcher into your calculator.
-  * **Hint:** requires Regex
-* [Create your own custom matcher](http://jasmine.github.io/2.0/custom_matcher.html).
-
-## Object-Oriented Javascript (10 / 105)
-
-You'll be spending a good portion of this week stepping up your OOJS game.
-* Let's reformat our calculator to reflect a Javascript object.
+You've already spent some time this week stepping up your OOJS game.
+* So you might be wondering why we're exporting our calculator methods individually.
+* Let's reformat our calculator into a Javascript object and "export" it to our spec file.
+* How do we go about doing that?
+  * `module.exports`! Help me set that up.
+  * What's the different between `exports.functionName` and `module.exports`?
 * Won't require any changes to our tests. Just `calculator.js`.
+  * Why is that?
 
 ```js
 // calculator.js
@@ -437,32 +375,64 @@ module.exports = {
     return ( minuend - subtrahend );
   },
 
-  // The rest of your calculator functions go here.
+  // The rest of your calculator methods go here.
 }
 ```
 
-## Exercise (Cont.): Refactor Calculator as Object (5 / 110)
+## Break (10 / 75)
 
-Refactor your calculator.js file so that instead of writing out a bunch of `functionName.exports`, all of your functions are condensed into one Javascript object.
-* Set `module.exports` equal to that object.
+## Exercise: Build Out Our Calculator (15 / 90)
+
+Follow the same process and add some functionality to our calculator.
+  1. Multiplication
+  2. Division
+  3. Square
+  4. Exponential
+  5. Average
 
 [Here's the calculator solution](https://github.com/ga-dc/jasmine-calculator) in case you need some guidance.
 
-## Break (10 / 120)
+### Bonus
+Implement `beforeEach` so that it initializes a `total` variable before each test.
+* Create a test that verifies the value of `total` after running multiple methods.
+  * e.g., Make sure `total` is the correct value after running `calculator.add` and `calculator.subtract` in a single test.
+* Reset the value of total using `afterEach`.
 
-## Exercise + Homework: Clock Hands (30 / 150)
+Test and add some advanced functionality.
+* [Factorial](http://www.mathsisfun.com/definitions/factorial.html)
+* [Logarithmic](https://www.mathsisfun.com/algebra/logarithms.html)
+
+Test for error messages when your calculator makes an invalid operation.
+* For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
+
+## Exercise (Cont.): Add Some Matchers (10 / 100)
+
+We've already played around with one matcher in our test expectations: `.toBe( )`
+* Implement the following functions using the indicated matchers...
+  * `.isNegative`: use `.not.` to check whether an input is negative. If it is, the expectation should return true.
+  * `.isGreaterThan`: use `.toBeGreaterThan()` to check whether the first of two arguments is greater than the second. If it is, the expectation should return true.
+* Need help? Look at the [Jasmine Documentation](http://jasmine.github.io/2.0/introduction.html#section-Matchers).
+
+[Here's the calculator solution](https://github.com/ga-dc/jasmine-calculator) in case you need some guidance.
+
+### Bonus
+
+* `.isEven`: use `.toMatch()` to check if a value is even.
+  * **Hint:** requires Regex
+* [Create your own custom matcher](http://jasmine.github.io/2.0/custom_matcher.html).
+
+## Break (10 / 110)
+
+## Exercise + Homework: Clock Hands (30 / 140)
 
 With the remaining time in class I'd like you to create this [Clock Hands angle calculator](https://github.com/ga-dc/sundial) using a TDD approach.
-<<<<<<< HEAD
-* There is no single way to do this, so feel free to create whatever tests you would like.
-* While you're together, I encourage you to tackle this exercise pair-programming style. Have one person write the test and the other write the code to make it pass. Switch with each test.
-=======
 * Combine problem solving with TDD.
 * There is no single way to do this, so feel free to create whatever tests you would like.
 * While you're together, I encourage you to tackle this exercise pair-programming style.
   * First, outline the problem. Think about not only how to approach it but what tests you will need to support it.
   * Keep switching off: have one person write a test and the other write the code to make it pass.
->>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
+
+## Questions + Closing (10 / 150)
 
 ## Additional Reading
 
