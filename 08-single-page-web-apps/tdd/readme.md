@@ -1,10 +1,17 @@
 ## Learning Objectives
 
 * Explain the purpose of TDD/BDD.
+<<<<<<< HEAD
 * Review RSpec and test syntax.
 * Describe Jasmine.
 * Compare/Contrast Jasmine & RSpec.
 * Setup Jasmine for a Node Project.
+=======
+* Review RSpec and standard testing syntax.
+* Describe Jasmine.
+* Compare/Contrast Jasmine & RSpec.
+* Implement TDD using Jasmine.
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 
 ## Do You Test? (5 / 5)
 
@@ -238,14 +245,22 @@ describe( "A person", function(){
 ## Getting Started
 
 First, we're going to install jasmine-node globally.
+<<<<<<< HEAD
 * `$ npm install jasmine-node -g`
+=======
+* `$ npm install  -g jasmine-node`
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 * Now we can use Jasmine across projects.
 
 ## What are we going to test?
 
 During this lesson we are going to write tests for and create a calculator application.
 * We're going to stick with Javascript here. No HTML/CSS at the moment.
+<<<<<<< HEAD
 * We're going to write this using Node, so you're going to see some unfamiliar syntax.
+=======
+* This will involve some Node syntax beyond what you've already seen.
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 * I'll try to explain as we go along, but don't worry understanding it 100% now. You'll learn more about Node as the week goes on.
 
 ## Let's get to work (20 / 55)
@@ -364,14 +379,24 @@ Follow the same process and add some functionality to our calculator.
   4. Exponential
 
 ### Bonus
+<<<<<<< HEAD
 Test for error messages when your calculator makes an invalid operation.
 * For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
+=======
+Make us of `beforeEach`  
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 
 Test and add some advanced functionality.
 * Average
 * Factorial
 * Logarithmic
 
+<<<<<<< HEAD
+=======
+Test for error messages when your calculator makes an invalid operation.
+* For example, test to make sure that your calculator returns a helpful error message when it tries to divide by 0.
+
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 ## Exercise (Cont.): Add Some Matchers (10 / 95)
 
 We've already played around with one matcher in our test expectations: `.toBe( )`
@@ -428,8 +453,16 @@ Refactor your calculator.js file so that instead of writing out a bunch of `func
 ## Exercise + Homework: Clock Hands (30 / 150)
 
 With the remaining time in class I'd like you to create this [Clock Hands angle calculator](https://github.com/ga-dc/sundial) using a TDD approach.
+<<<<<<< HEAD
 * There is no single way to do this, so feel free to create whatever tests you would like.
 * While you're together, I encourage you to tackle this exercise pair-programming style. Have one person write the test and the other write the code to make it pass. Switch with each test.
+=======
+* Combine problem solving with TDD.
+* There is no single way to do this, so feel free to create whatever tests you would like.
+* While you're together, I encourage you to tackle this exercise pair-programming style.
+  * First, outline the problem. Think about not only how to approach it but what tests you will need to support it.
+  * Keep switching off: have one person write a test and the other write the code to make it pass.
+>>>>>>> bc79bcda9836d7b16e6828c19a8a22b76de622d4
 
 ## Additional Reading
 

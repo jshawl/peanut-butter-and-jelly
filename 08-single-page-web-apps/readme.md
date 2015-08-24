@@ -17,8 +17,8 @@ Build an interactive "single page" web application that persists data.
 - Define the parts of a route
 - Extract routes to separate files
 - Explain the `all` routing method
-- Support multiple functions for a single route
 - Describe the role of response methods
+- Extract routes to a separate file
 
 ### Intro to SPA
 
@@ -29,36 +29,41 @@ Build an interactive "single page" web application that persists data.
 - Identify common problems with single page applications
 
 ### JS Prototypes and Constructors
-- List the advantages of object oriented javascript relative its alternatives.
-- Contrast an object, a hash, and an array.
-- Explain the role of a constructor in an object.
-- Describe at least two ways to create a new instance of an object.
-- Provide definitions for both classical and prototypal inheritance, or provide a description of the difference between the two.
+- Explain the importance of OOJS in front-end code
+- Describe the role of constructor functions, and how they work
+- Use constructor functions to create objects with shared properties (like classes)
+- Describe what a prototype object is, and how they are used in JS
+- Differentiate between `__proto__` and Animal.prototype
+- Diagram the relationship between an object, its constructor, and prototype
+- Use `Object.create` to create inheritance relationships
+- Compare / contrast classical and prototypal inheritance
 - Use the Chrome element inspector to traverse through the prototypal tree.
-- Add a property and a method to all instances of a prototype.
-- Given an occurrence of `this`, explain to which object it refers, and provide a method by which you could find out to what it refers.
 
 ### Sequelize
 
-* Describe what sequelize is
-* Use sequelize to connect to a DB in JS
-* Define a model in sequelize that has getters and setters
-* Define the roll of callbacks in Sequelize
-* Use sequelize to find models from the DB
-* Use sequelize to perform CRUD on model instances
-* Compare / contrast Sequelize and ActiveRecord
+- Compare / contrast Sequelize and ActiveRecord
+- Use sequelize to connect to a DB in JS
+- Define a model in sequelize that has getters and setters
+- Define the roll of callbacks in Sequelize
+- Describe why database are asynchronous (and what asynchronous means)
+- Use Sequelize to find models from the DB
+- Use Sequelize to perform CRUD on model instances
+- Create an API with CRUD functionality using Express and Sequelize
+- Map a directory / file structure conducive to DB modeling
+- Map Rails / ActiveRecord methods to Express / Sequelize methods
 
 ### OOJS 1: Reading
 
 ### OOJS 2: CUD
 
+- Use AJAX
+
 ### JS TDD
 
-- Explain the purpose of Unit testing and TDD/BDD.
-- Review RSpec and test syntax.
+- Explain the purpose of TDD/BDD.
+- Review RSpec and standard testing syntax.
 - Describe Jasmine.
-- Setup Jasmine for a Rails project.
+- List components of a Jasmine test.
 - Compare/Contrast Jasmine & RSpec.
-- Explain how `this` is used within Jasmine.
-
-### Mini-Lesson: Canvas
+- Implement TDD using Jasmine.
+- Use different Jasmine matchers.
