@@ -11,7 +11,24 @@
   * Handle events on a map
 * Explain what geoJSON is and how map apis like leaflet utilize it.
 
+## Why Are We Having A Class on Maps?
+
+Location-based apps have and continue to be the rave.
+* Some of you have already incorporated map APIs into your WDI projects.
+
+## A History of Maps Online
+
+* 2006: Google Maps
+* 2006: Google Maps API
+
 ## What is Leaflet?
+
+> [Leaflet](http://leafletjs.com/) is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 33 KB of JS, it has all the mapping features most developers ever need.
+
+Leaflet is a Javascript library, created by [Mapbox](https://www.mapbox.com/), thats allows us to create an render interactive maps in the browser.
+* Pulls map information from [OpenStreetMap](https://www.openstreetmap.org/), an open source map database.
+* Allows us create the same type of objects you see in Google Maps (e.g., markers, routes, polygons).
+* We can use Javascript events to add interactivity to a Leaflet map.
 
 ## Setup
 
@@ -252,6 +269,13 @@ All GeoJSON objects must have a `type` value, which can equal a Geometry type, "
   * What you'll probably use most of the time.
   * Can make use of the above geometry types.
   * More importantly, allows us to add custom properties about our geographical information (e.g., location name, pop-up display content).
+* Feature Collection
+  * A collection of features. These are stored in a `features` property, which is an array of feature objects.
+
+Below is an example GeoJSON "feature".
+* **FYI:** The GeoJSON documentation is a great first place to look if you have any questions about syntax.
+* **Also FYI:** GeoJSON coordinates are written in the order of longitude then latitude.
+  * Google Maps, for example, lists them in the reverse order, so keep that in mind when pulling coordinates from elsewhere.
 
 ```js
 // We're saving a GeoJSON object to a variable.
@@ -261,7 +285,7 @@ var monumentTrail = {
   // Can set "properties" to whatever we want.
   "properties": {
     "name": "Monuments Trail",
-    "city": "Washington, DC"
+    "city": "Washington, DC",
     "numStops": 5
   },
 
@@ -269,11 +293,9 @@ var monumentTrail = {
   "geometry": {
     "type": "MultiLineString",
     "coordinates": [
-      [38.8976763,-77.0365298],   // White House
-      [38.8894838,-77.0352791],   // Washington Monument
-      [38.8892686,-77.050176],    // Lincoln Memorial
-      [38.8813726,-77.0364707],   // Jefferson Memorial
-      [38.8899389,-77.0090505]    // Capitol
+      [[-77.0352791,38.8894838], [-77.050176,38.8892686]],
+      [[-77.050176,38.8892686], [-77.0364707,38.8813726]],
+      [[-77.0364707,38.8813726], [-77.0090505,38.8899389]]
     ]
   }
 }
@@ -285,4 +307,9 @@ Then we render the GeoJson...
 L.geoJson( monumentTrail ).addTo( map );
 ```
 
-**[GET ^^^THIS^^^ TO WORK!!!!]**
+And we should see something like this...
+
+!["geojson monument trail"](img/geojson-monument-trail.png)
+
+**[EXERCISE/LAB OPPORTUNITY: Use GeoJSON to generate map components]**
+* BONUS: Generate geographical information (e.g., lat/long using a 3rd-party API).
