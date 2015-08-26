@@ -15,11 +15,15 @@
 
 Location-based apps have and continue to be the rave.
 * Some of you have already incorporated map APIs into your WDI projects.
+might be worth touching base with a UXer to see what they have to say about maps
+maybe you could demo a couple cool maps - http://www.amcharts.com/demos/map-with-curved-lines/
+maybe look for interactive ones
 
 ## A History of Maps Online
 
 * 2006: Google Maps
 * 2006: Google Maps API
+could be somethin cool in here, too - https://en.wikipedia.org/wiki/Web_mapping#History_of_web_mapping
 
 ## What is Leaflet?
 
@@ -28,11 +32,15 @@ Location-based apps have and continue to be the rave.
 Leaflet is a Javascript library, created by [Mapbox](https://www.mapbox.com/), thats allows us to create an render interactive maps in the browser.
 * Pulls map information from [OpenStreetMap](https://www.openstreetmap.org/), an open source map database.
 * Allows us create the same type of objects you see in Google Maps (e.g., markers, routes, polygons).
+  - then why use leaflet? any particular reason?
 * We can use Javascript events to add interactivity to a Leaflet map.
 
 ## Setup
 
 ### Create files
+
+I recommend some starter code here. That way, they can clone and getset up quicker, but also
+they can reference the solution.
 
 Create a `map` directory in your in-class directory. From there...
 
@@ -90,6 +98,7 @@ $ touch app.js
 
 #### Map ID
 After creating an account, click "Projects" towards the right of the navbar. It may look like a folder icon without text.
+A screenshot might be helpful here to identify icons.
 * On the following screen, click "My First Map".
 * Copy the value in the **Map ID** field. You'll need this later.
 
@@ -108,6 +117,8 @@ Then, click on your username/avatar in the navbar.
 var map = L.map('map').setView([38.9038829, -77.0360032], 15);
 ```
 
+Check out http://itouchmap.com/latlong.html to play with your own coordinates!
+
 `L.map()`
 * This method takes the ID of your map container as an argument. In this case, it's simply "map".
 
@@ -118,12 +129,15 @@ var map = L.map('map').setView([38.9038829, -77.0360032], 15);
 
 When your map declaration is set up, you should see something like this...
 
-!["empty map"](img/empty-map.png)
+!["empty map"](img/empty-map.png)nice
 
 ### Add Tiling
 
+I dont understand how the tiling is different than the map.
 Our map won't do much good without tiling (i.e., the map itself). We can add tiling using Leaflet's `.tileLayer` method. Enter this below your `L.map().setView()` method.
 * Make sure to fill in `id` and `accessToken` with the **Map ID** and **Default Public Token** values you saved earlier.
+
+is it ok to put access token in js here?
 
 ```js
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -152,6 +166,11 @@ Add a marker to your map using the `L.marker` method.
 // `map` is the variable we originally saved our map to.
 var generalAssembly = L.marker( [38.9048542, -77.0339403] ).addTo( map );
 ```
+
+right here feels like a good time for a you do:
+
+i.e. find five locations' coordiantes, loop through them
+and put markers on the map.
 
 You can also use a circle to cover a portion of a map using `L.circle()` and `.addTo( map )`. Takes three arguments...
   1. Latitude/longitude array.
@@ -183,6 +202,8 @@ var washington = L.polygon([
 ```
 
 **[EXERCISE OPPORTUNITY?: Markers, Circles, Polygons]**
+convert the previous exercise to form a polygon between the five points?
+bonus: let the user type in a city state combo to search, and put that marker on the map
 
 ## Map Pop-Ups
 
@@ -242,6 +263,7 @@ map.on( "click", function( event ){
 ```
 
 **[EXERCISE/MINI-LAB OPPORTUNITY: Create list of prompts that use event responses in different ways. Have them work in pairs.]**
+I'm not sure I understand this one.
 
 Check out Leaflet's [event documentation](http://leafletjs.com/reference.html#events) if you want to learn more.
 
@@ -313,3 +335,6 @@ And we should see something like this...
 
 **[EXERCISE/LAB OPPORTUNITY: Use GeoJSON to generate map components]**
 * BONUS: Generate geographical information (e.g., lat/long using a 3rd-party API).
+
+Overall lesson looks great! Still need to flesh out exercises, and I recommend repos
+with starter code and solution code if people get lost.
