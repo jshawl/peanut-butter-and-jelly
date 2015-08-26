@@ -66,9 +66,6 @@ The REPL: Pry
 
 ### Some Differences From Javascript
 
-Part of your homework last night was to identify a programming concept shared by Javascript and Ruby and compare/contrast its implementation in each of the languages.
-- BOARD: Share and write on board.
-
 #### Variables (5min)
 
 No longer need to precede new variables with `var`. Just use the name of the variable!
