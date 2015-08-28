@@ -7,11 +7,13 @@
 
 ## Intro
 
-We are moving into the ,ore programmatic portion of SassScript: conditional, loops, and functions.
+We are moving into the more programmatic portion of SassScript: conditional, loops, and functions.
 
 ## @if
 
 ???
+
+> Q: What would if be used for? Given what you know about css and its limitations, how is this helpful?
 
 ## BAMSAY!
 
@@ -76,5 +78,18 @@ Now we've added "functions" to our list, joining "variables" and "loops".
 ## Sass and Rails
 
 ???
+definitely students will get tripped up with using the asset pipeline's `//= require` vs
+sass' `@import`. use `@import` here to include variables from other sass files.
 
 ## [Optional] Create a Pull Request to Sass
+
+Hell yeah! Even just pulling down the code, running the test suite
+and running the local version would be cool but this might be outside the scope of this lesson.
+
+
+Overall:
+
+I really like this lesson. It is very exploratory - and I could see people getting it quickly and
+not knowing where to go next and also people struggling hard here. 
+
+Maybe include opportunities for bonuses?
