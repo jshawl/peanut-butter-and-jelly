@@ -74,6 +74,7 @@ App.Views.GrumblesList = Backbone.View.extend({
 Essentially, we are "coupling" our view with the DOM.
 * [Some people don't like this](http://coenraets.org/blog/2012/01/backbone-js-lessons-learned-and-improved-sample-app/).
 * Why do you think that is?
+* If we don't set an `el` property, we create a ghost `el` that lives in Javascript until we manually attached it to the DOM.
 
 **NOTE** This **does not** replace th `$el` property we have been using since learning OOJS.
 * We will continue to use `$el` to generate a DOM representation of our collection view.
@@ -202,11 +203,14 @@ That's it...for now.
 ## Specialty Views (5)
 
 So we have views for our Grumbles -- model and collection. What about one for our new Grumble form?
+* Let's make a **specialty view.**
 
-**NOTE: Will create own version of this diagram.**
-* Will task students with creating the equivalent of `LoginView` below.
+We've already gone everything we need to know in order to create a specialty view. Now, it's just a matter of putting all the pieces together.
+* You're going to spend the rest of this class making one.
+* It will looking something like the `createView` below.
 
 ![view diagram](img/view-diagram.png)
+* **NOTE TO SELF: Will create own version of this diagram and highlight `createView`.**
 
 ## Exercise: Specialty View for Creating Grumbles
 
