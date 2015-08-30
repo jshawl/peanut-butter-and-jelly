@@ -206,7 +206,7 @@ So we have views for our Grumbles -- model and collection. What about one for ou
 **NOTE: Will create own version of this diagram.**
 * Will task students with creating the equivalent of `LoginView` below.
 
-![view diagram](/img/view-diagram.png)
+![view diagram](img/view-diagram.png)
 
 ## Exercise: Specialty View for Creating Grumbles
 
