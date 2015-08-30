@@ -16,16 +16,29 @@
 ## Opening Framing (5/5)
 What's the purpose of a front end framework? JS and all of it's many libraries are great, but you can start building and building your application and all of a sudden there's no structure and everything's soup.
 
+How we got here:
+1. vanilla js
+  - a lot of code to write
+2. jQuery
+  - easier to do more
+  - easier to write more bad code
+3. OOJS
+  - more structured but a royal pain to write
+4. Frameworks
+  - All the structure of OOJS with the ease of writing like jQuery.
+
 ### libraries (2.5/7.5)
 
 - libraries gives us tools to utilize.
 - abstracts code and allows us to write our code more succinctly
 - allows us to write applications faster and easier
+- lots of options, very few rules (jQuery)
 
 ### frameworks (2.5/10)
 
 - like libraries in that it gives us tools to utilize
 - additionally they provide structure and conventions users have to follow in order for them to work.
+- Lots of rules (convention), few options (Ruby on Rails)
 
 ## What is a front end framework? (5/15)
 - a library that attempts to move some or all application logic to the browser, while providing a simple interface for keeping the front-end in sync with the back-end
@@ -39,6 +52,7 @@ What's the purpose of a front end framework? JS and all of it's many libraries a
 Individual reading(10/25)
 - Go to [backbonejs documentation](http://backbonejs.org/)
   - Read from Getting Started to Backbone.Model
+  - :+1: for getting into the docs so early.
 
 ### T&T(5/30)
 - With what you know about OOJS, jot down some ideas about what you think Backbone is and why you would use it.
@@ -72,6 +86,8 @@ mkdir js/models
 touch js/app.js
 touch js/models/grumble.js
 ```
+
+maybe git cloning a repo would be better here? That way, you can provide the solution code as well.
 
 > Something to note, backbone doesn't yell at you for having your code in the wrong folders. However, going forward it will be nice for you and future you to separate our concerns. You will see the more of this importance when we get into backbone views and routing. Additionally note that we are just using a static `index.html` page to create this application. Backbone can sit on top of frameworks like rails and express as well. The configuration and setups can be a bit different depending on the domain you're working in.
 
@@ -126,12 +142,13 @@ An object that represents data attributes and behavioral logic related to an ent
 Let's define our very first backbone model. In `js/models/grumble.js`:
 
 ```javascript
-Grumble = Backbone.Model.extend({
+var Grumble = Backbone.Model.extend({
 
 })
 
 ```
 > Much like inheriting from `ActiveRecord::Base`. Were just extending backbone model functionality into our own model definitions.
+nice conneciton here.
 
 Awesome! Let spin up our sweet website. (include a document ready and a console.log to show js/jquery dependency is working). In `js/app.js`:
 
@@ -174,6 +191,7 @@ grumble.set({timeOfDay: "morning", visibility:"daytime"})
     })
   ```
 - we can also use `attributes`
+saw your comment in slack, im not sure what the difference between attributes and get/set is.
 ```js
 grumble.attributes.newAttribute = "this is a new attribute"
 ```
@@ -182,7 +200,8 @@ in `js/models/grumble.js`:
 ```javascript
 Grumble = Backbone.Model.extend({
   defaults:{
-    content: "the default content!"
+    content: "the default content!" // maybe use a more practical example,
+                                    // like completed: false for todos
   }
 })
 ```
@@ -250,6 +269,7 @@ var grumbles = new Grumbles([grumble1, grumble2, grumble3])
 
 // set on existing collection
 grumbles.set([grumble1, grumble2])
+// does this remove grumble3?
 
 // added to existing collection
 grumbles.add(grumble1)
@@ -309,12 +329,16 @@ $ rake db:seed
 $ rails s
 ```
 
+we also have the deployed version if you want - http://grumblr.wdidc.org/grumbles
+`git remote add production git@git.wdidc.org:grumblr_rails_api.git`
+if you want to push, Andy.
+
 ### Models
 Remember all that complex ajax stuff we used to get information from a server? Well BB abstracts all of that for you and makes it much easier. All we have to do is change up our model definition slightly! In `app/assets/javascripts/backbone/models/grumbleModel.js`:
 
 ```javascript
 var Grumble = Backbone.Model.extend({
-  urlRoot: "http://localhost:3000/grumbles",
+  urlRoot: "http://localhost:3000/grumbles", //can you use /grumbles without the localhost here? will be easier to deploy.
   defaults: {
 
   }
@@ -350,7 +374,7 @@ var GrumblesCollection = Backbone.Collection.extend({
     console.log('New Grumbles Collection');
   },
   model: Grumble,
-  url: '/grumbles'
+  url: '/grumbles' //what's the difference between url and urlRoot?
 });
 ```
 
@@ -363,3 +387,6 @@ collection.create({authorName: "bob", content: "smith", title: "the title", phot
 will actually save an instance of that model to the database, so long as you meet the strong params requirements.
 
 ## Class Ex - Reminders Part 2 (60/150)
+
+Overall looks good! Let me know if you want review/code for the Reminders exercise. Also, for students who
+might be moving quickly, can you think of any bonus opportunities during your code alongs?
