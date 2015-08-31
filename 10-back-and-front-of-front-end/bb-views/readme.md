@@ -213,7 +213,7 @@ App = {
 };
 
 $(document).ready(function() {
-  var grumbles = new App.Collections.GrumblesList();
+  var grumbles = new App.Collections.Grumbles();
   var grumblesList = new App.Views.GrumblesList({ collection: grumbles });
   grumbles.fetch({ reset: true })
 });
