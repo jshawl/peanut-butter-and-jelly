@@ -90,9 +90,10 @@ Why do we need a `renderOne` method?
 
 ### Exercise: Create a `renderOne` method.
 
-1. Instantiate a function that takes a model as an argument.
-2. Create a view for the passed-in model.
-3. Append that model view to the collection view.
+Steps  
+* Instantiate a function that takes a model as an argument.
+* Create a view for the passed-in model.
+* Append that model view to the collection view.
 
 ```js
 App.Views.GrumblesList = Backbone.View.extend({
@@ -109,6 +110,18 @@ App.Views.GrumblesList = Backbone.View.extend({
 });
 ```
 
+### Let's Test In The Console
+
+```js
+var grumbles = new App.Collections.Grumbles();
+var grumblesList = new App.Views.GrumblsList({ collection: grumbles });
+grumblesList.$el;
+// => DOM representation of collection
+
+var grumble = new App.Model.Grumble({ model: ... });
+grumblesList.renderOne( grumble );
+```
+
 ## renderAll (10)
 
 Now our collection view's `$el` property contains all of our model views. The next step is to append that `$el` to the DOM.
@@ -116,8 +129,9 @@ Now our collection view's `$el` property contains all of our model views. The ne
 
 ### Exercise: Create a `renderAll` method.
 
-1. Clear out the collection view's current $el property.
-2. Iterate through our collection (i.e., our collection's models) and render its individual model views.
+Steps
+* Clear out the collection view's current $el property.
+* Iterate through our collection (i.e., our collection's models) and render its individual model views.
 
 ```js
 App.Views.GrumblesList = Backbone.View.extend({
@@ -145,8 +159,9 @@ Like our model view, our collection view also needs event listeners so that it r
 
 ### Exercise: Create event listeners for our collection view.
 
-1. Create a listener that re-renders our entire view upon reset.
-2. Create a listener that renders a new model view when one is added to our collection.
+Steps  
+* Create a listener that re-renders our entire view upon reset.
+* Create a listener that renders a new model view when one is added to our collection.
 
 ```js
 App.Views.GrumblesList = Backbone.View.extend({
@@ -168,12 +183,17 @@ App.Views.GrumblesList = Backbone.View.extend({
 });
 ```
 
+## Test Collection View in Console
+
+
+
 ## Update app.js (5)
 
 ### Exercise: Update `app.js` so our application instantiates and renders a collection view.
 
-1. Instantiate a collection
-2. Instantiate a collection view and pass in a collection.
+Steps  
+* Instantiate a collection
+* Instantiate a collection view and pass in a collection.
 
 ```js
 // app.js
@@ -216,8 +236,8 @@ We've already gone everything we need to know in order to create a specialty vie
 
 ### Part 1: View and Template (30)
 
-Steps
-1. Start by adding the following HTML to the top of your HTML `<body>`.
+Steps  
+* Start by adding the following HTML to the top of your HTML `<body>`.
 
   ```html
   <div id="createGrumble">
@@ -226,13 +246,13 @@ Steps
   </div>
   ```
 
-2. Create a `grumbleCreate.js` file in your views folder.
-3. In that file, instantiate a new Backbone view called `GrumbleCreate`.
-4. Couple your view with the DOM element you created in Step 1.
-5. Create a handlebars template for your view.
-6. Define an `initialize` method that inserts your template into the view's `$el`.
+* Create a `grumbleCreate.js` file in your views folder.
+* In that file, instantiate a new Backbone view called `GrumbleCreate`.
+* Couple your view with the DOM element you created in Step 1.
+* Create a handlebars template for your view.
+* Define an `initialize` method that inserts your template into the view's `$el`.
   * **Hint:** Use `.html()`.
-7. Define a `createGrumble` method that creates a Grumble based on user input to your template form. This method should...
+* Define a `createGrumble` method that creates a Grumble based on user input to your template form. This method should...
   * Create an object literal that contains your new Grumble model's data.
   * Save this object literal as a model in your collection.
 
@@ -292,3 +312,5 @@ App.Views.GrumbleCreate = Backbone.View.extend({
 ```
 
 ## Break (10)
+
+## Homework: Grumble Comments
