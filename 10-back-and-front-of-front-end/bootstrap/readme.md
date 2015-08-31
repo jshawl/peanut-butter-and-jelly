@@ -8,6 +8,7 @@
 - Compare and contrast Bootstrap with other front-end frameworks (e.g., Foundation and Material Design).
 
 ## [Check out this awesome app we made](http://ga-dc.github.io/grumblr_backbone/)
+really appreciate your work on this. will make the non-backbone students feel included!
 
 ### This is a Backbone app
 
@@ -23,13 +24,15 @@ Feel free to poke around in the code.
 
 Bootstrap is the visual theme on which much of the modern web is based. For instance, the styling of Github's readmes and markdown files is based very heavily on Bootstrap.
 
+One of the creators of bootstrap, [Mark Otto](http://markdotto.com/) left twitter shortly after releasing bootstrap and now works at GitHub!
+
 Bootstrap was born in 2011 as Twitter Blueprint. The fact that it's ubiquitious now speaks to how much of a need there was for it: prior to Bootstrap, there were lots of mini-frameworks you could use, but trying to run 35 stylesheets at the same time creates a tremendous headache.
 
 ### Bootstrap is a godsend for developers
 
 As has been discussed, you can make the most amazing back-end functionality ever, but if the front-end doesn't look presentable you'll have a difficult time selling it.
 
-Bootstrap lets you make a polished-looking app with minimal effort. As a result, many websites today look very "Bootstrappy".
+Bootstrap lets you make a polished-looking app with minimal effort. As a result, many websites today look very ["Bootstrappy"](https://24ways.org/2012/how-to-make-your-site-look-half-decent/).
 
 Unless you're trying to get a job in the realm of visual design, it's better to spend 15 minutes making your app look good with Bootstrap than it is to spend 3 days writing your own CSS. Why?
 
@@ -40,6 +43,8 @@ But...
 #### Why might tech-savvy employers actually *prefer* a candidate who spent 15 minutes using Bootstrap to one who spend 3 days writing their own CSS? Doesn't the second way show better work ethic?
 
 Making sure you have a presentable front-end is a lot like making sure you wrote your name on the test before turning it in. Painstakingly writing your name in calligraphy won't get you a better result than chicken-scratching your name; in fact, it'll probably just look like a waste of time.
+
+excellent framing here!
 
 ## Bootstrap's classes have weird names
 
@@ -66,6 +71,8 @@ Originally I was going to walk through all of these classes with the class as a 
 So instead, with your table, Google madly to make a cheat sheet for yourself that includes:
 - What each word means
 - A URL that shows an example of that word/class in action
+
+:+1: awesome you do exercise!!! maybe ask them to try using one in their own html scratch page?
 
 #### What did everyone get?
 
@@ -107,6 +114,8 @@ This is one place where you sort-of see Bootstrap trying to straddle the line be
 
 **You insert a library into your code; you insert your code into a framework.**
 
+also, here's andy's description - https://github.com/ga-dc/pbj/tree/59d18a43c354e20d8583b855e4b62b0d7fb68249/10-back-and-front-of-front-end/bb_models_collections#libraries-2575
+
 It's not unlikely that some Bootstrap user will want to make their own CSS class called `.danger` that is completely unrelated to Bootstrap. It's extremely unlikely that anyone's going to create their own class called `.btn-danger`.
 
 Bootstrap's "library personality" wants to be as unobtrusive as possible and not conflict with any classes users might be defining. This is the personality that's prevailing over the Bootstrap's other half, the "framework personality," which would use `.danger` and include documentation saying that users **should not** create classes called `.danger`.
@@ -122,6 +131,8 @@ But anyway...
 - You can download the uncompiled source code as SASS or LESS, pick the components you want, and compile that.
   - http://getbootstrap.com/getting-started/#download
 
+>Q: What are the differences between the above options? why use one vs another?
+
 ### Containers
 
 Bootstrap sections a page with "container", as in `<div class="container">` You're not supposed to put a container inside another container.
@@ -135,7 +146,8 @@ Inside a container, you can use Bootstrap's built-in grid system. It lets you br
 </div>
 ```
 
-The middle value indicates the viewport width for which you want a particular container to be optimized:
+Remember the grid we built from scratch - https://github.com/ga-dc/pbj/tree/59d18a43c354e20d8583b855e4b62b0d7fb68249/07-uxdi-collaboration/grids#create-columns-with-specific-widths-15--80?
+bootstrap has that, *and* the middle value indicates the viewport width for which you want a particular container to be optimized:
 
 `xs` (phones), `sm` (tablets), `md` (desktops), `lg` (big desktops)
 
@@ -200,6 +212,8 @@ But let's say there's something else you want to customize.
 We can use SASS to make some changes and pre-compile Bootstrap!
 
 Bootstrap's written in LESS, which is like SASS but written in Javascript, but there's an official SASS port.
+
+soon, bootstrap is moving to sass - http://blog.getbootstrap.com/2015/08/19/bootstrap-4-alpha/#whats-new
 
 ### bootstrap-sass
 
@@ -271,6 +285,8 @@ This lets me drastically DRY up that form HTML from before:
 </form>
 ```
 
+wow awesome solution. would be nice to have a link to a completed page. maybe a gh-pages branch?
+
 ## Everything else about Bootstrap
 
 ...is just picking and choosing the classes you want.
@@ -285,3 +301,9 @@ https://github.com/ga-dc/grumblr_css_redesign
 - Name two Bootstrap classes and explain what they do.
 - What's the difference between a glyphicon and a jumbotron and a Megatron?
 - Give an example of a situation in which you might want to use Bootstrap, versus one in which you might not.
+
+any homework ideas? maybe pick one js thing, like tooltips - http://getbootstrap.com/javascript/#tooltips and use it in your portfolio
+homework from yesterday. This will demonstrate your familiarity with popular design frameworks. clients love bootstrap!
+
+overall, great lesson plan!! I'd recommend planning explicit breaks and where lunch fits to maintain the
+self-teaching flow you started with the bootstrap scavenger hunt early on.
