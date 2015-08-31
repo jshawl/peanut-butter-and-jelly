@@ -24,14 +24,16 @@ So we have a model view for each Grumble. What can it do?
   * Defined by a Handlebars template: `grumbleTemplate`.
   * Attached to the DOM using a `render` method.
 * Acts as a controller. Manages CRUD interactions with model.
+  * Listening for events, not only in the DOM but also in the model!
   * `updateGrumble`, `deleteGrumble`.
+  * It also handles non-CRUD interactions (e.g., toggle form, change background to lemonchiffon).
 * Generates DOM elements (e.g., forms) required for CRUD interactions.
   * Defined by a Handlebars template: `grumbleFormTemplate`.
   * A mini "specialty view" of sorts.
 
 Next: a **collection view** that does the same thing for multiple models in different scenarios.
   * When we first load Grumblr, all of our Grumbles should be rendered.
-  * When we create a new Grumble, it should be appended to our existing list of Grumbles.
+  * When we create a new Grumble, it should be added to our existing list of Grumbles.
 
 ## Let's Get Started
 
@@ -60,6 +62,7 @@ Next, we're going to bind our collection view to a DOM element.
 
 In Backbone, we can define an `el` property that indicates a DOM element to which our collection view, once rendered, will automatically append to.  
 * So if we set `el: "#grumbles"`, our collection view will automatically append to `<div id="grumbles"></div>` upon rendering.
+* Whatever we set `el` as, that DOM node must already exist in `index.html`.
 
 ```js
 App.Views.GrumblesList = Backbone.View.extend({
@@ -76,7 +79,7 @@ Essentially, we are "coupling" our view with the DOM.
 * Why do you think that is?
 * If we don't set an `el` property, we create a ghost `el` that lives in Javascript until we manually attached it to the DOM.
 
-**NOTE** This **does not** replace th `$el` property we use to build the DOM representation of our collection.
+**NOTE** This **does not** replace the `$el` property we use to build the DOM representation of our collection.
 
 ## renderOne
 
@@ -180,7 +183,8 @@ App.Views.GrumblesList = Backbone.View.extend({
   },
 
   renderOne: function( grumble ){
-    var view = new App.Views.Grumble
+    var view = new App.Views.Grumble({ model: grumble });
+    this.$el.prepend( view.$el );
   },
 
   renderAll: function(){
@@ -189,6 +193,10 @@ App.Views.GrumblesList = Backbone.View.extend({
   }
 });
 ```
+
+Hold up. Why don't we need to pass in an argument to the `renderOne` callback in our "add" listener?
+* Awesome Backbone feature: it just knows!
+* "add" inherently passes in a model.
 
 ## Test Collection View in Console
 
@@ -205,9 +213,7 @@ What To Do
 
 App = {
   Models: {},
-  Views: {
-    grumbleViews: []
-  },
+  Views: {},
   Collections: {},
   Routers: {}
 };
@@ -221,7 +227,7 @@ $(document).ready(function() {
 
 That's it...for now.
 * As we continue building on our Backbone application, we'll revisit our collection view and add on some additional functionality.
-* Wait, we don't need events here? Why?
+* Wait, we don't need DOM events here? Why?
 
 ## Break
 
@@ -229,6 +235,8 @@ That's it...for now.
 
 So we have views for our Grumbles -- model and collection. What about one for our new Grumble form?
 * Let's make a **specialty view.**
+
+Question: why are we not just putting this inside our model or collection views?
 
 We've already gone everything we need to know in order to create a specialty view. Now, it's just a matter of putting all the pieces together.
 * You're going to spend the rest of this class making one.
