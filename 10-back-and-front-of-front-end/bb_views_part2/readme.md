@@ -17,7 +17,7 @@ This morning Adam went over three types of views we will encounter in Backbone.
 
 This afternoon, we will go over the latter two.
 
-## Collection View
+## Model View Recap
 
 So we have a model view for each Grumble. What can it do?
 * Generate a DOM representation of each Grumble.
@@ -25,11 +25,15 @@ So we have a model view for each Grumble. What can it do?
   * Attached to the DOM using a `render` method.
 * Acts as a controller. Manages CRUD interactions with model.
   * Listening for events, not only in the DOM but also in the model!
+    - is this two way data binding?
   * `updateGrumble`, `deleteGrumble`.
   * It also handles non-CRUD interactions (e.g., toggle form, change background to lemonchiffon).
 * Generates DOM elements (e.g., forms) required for CRUD interactions.
   * Defined by a Handlebars template: `grumbleFormTemplate`.
   * A mini "specialty view" of sorts.
+    - is specialty view a special term? why in quotes here but not before?
+
+## Collection View
 
 Next: a **collection view** that does the same thing for multiple models in different scenarios.
   * When we first load Grumblr, all of our Grumbles should be rendered.
@@ -38,6 +42,8 @@ Next: a **collection view** that does the same thing for multiple models in diff
 ## Let's Get Started
 
 If you need a starting point for the remainder of this lesson, fork and clone from [this branch](https://github.com/ga-dc/grumblr_backbone/tree/views_part_1_solution).
+
+how does one clone from a branch? - http://stackoverflow.com/a/7034921/850825
 
 Let's begin as we did earlier in class and create our collection view in `/js/backbone/views/grumblesList.js`...
 * What is the syntax we have used so far to create Backbone models and views?
@@ -80,6 +86,8 @@ Essentially, we are "coupling" our view with the DOM.
 * If we don't set an `el` property, we create a ghost `el` that lives in Javascript until we manually attached it to the DOM.
 
 **NOTE** This **does not** replace the `$el` property we use to build the DOM representation of our collection.
+
+What is the difference between el and $el?
 
 ## renderOne
 
@@ -130,6 +138,7 @@ var grumble = new App.Model.Grumble({
   photoUrl: "http://img1.owned.com/media/images/2/3/2/1/23217/tupacca_540.jpg"
 });
 grumblesList.renderOne( grumble );
+// maybe indiicate this does not create a new grumble in the db, despite it being on the page.
 ```
 
 ## renderAll
@@ -158,7 +167,7 @@ App.Views.GrumblesList = Backbone.View.extend({
 
   renderAll: function(){
     this.$el.empty();
-    this.collection.each( this.renderOne.bind(this) );
+    this.collection.each( this.renderOne.bind(this) ); //nice!
   }
 });
 ```
@@ -197,8 +206,22 @@ App.Views.GrumblesList = Backbone.View.extend({
 Hold up. Why don't we need to pass in an argument to the `renderOne` callback in our "add" listener?
 * Awesome Backbone feature: it just knows!
 * "add" inherently passes in a model.
+* technically it does, here's the equivalent:
+
+```js
+this.listenTo(this.collection, 'add', function(event){
+  this.renderOne(event)
+}.bind(this));
+
+// right?
+```
 
 ## Test Collection View in Console
+
+can you provide the solution here?
+
+e.g. type into console:
+???
 
 ## Update app.js
 
@@ -228,6 +251,7 @@ $(document).ready(function() {
 That's it...for now.
 * As we continue building on our Backbone application, we'll revisit our collection view and add on some additional functionality.
 * Wait, we don't need DOM events here? Why?
+* what about jquery events. is it one or the other?
 
 ## Break
 
@@ -237,6 +261,8 @@ So we have views for our Grumbles -- model and collection. What about one for ou
 * Let's make a **specialty view.**
 
 Question: why are we not just putting this inside our model or collection views?
+
+what's the answer?
 
 We've already gone everything we need to know in order to create a specialty view. Now, it's just a matter of putting all the pieces together.
 * You're going to spend the rest of this class making one.
@@ -275,13 +301,16 @@ What To Do
 ### Part 2: Create The Grumble
 
 * Define a `createGrumble` method that creates a Grumble based on user input to your template form. This method should...
+  - method on what object? oh i see GrumbleCreate above
   * Create an object literal that contains your new Grumble model's data.
+    - is it an object literal or a new grumble model?
   * Save this object literal as a model in your collection.
 * Create an event that will trigger your `createGrumble` method.
 
 ### Bonus: Toggle Form
 
-Your createGrumbleView should be hidden upon page load. If the user wants to create a new Grumble, he must click a "Show Form" button that reveals the form.
+nice!
+Your createGrumbleView should be hidden upon page load. If the user wants to create a new Grumble, she must click a "Show Form" button that reveals the form.
 
 ### Solution
 
@@ -304,7 +333,7 @@ App.Views.GrumbleCreate = Backbone.View.extend({
   },
 
   toggleForm: function(){
-    this.toggleButton(this.$(".new").text());
+    this.toggleButton(this.$(".new").text()); // what is `this.$("selector") ? havent used that before`
     this.toggleUrlState(this.$(".new").text());
     event.preventDefault();
     this.$(".formContainer").slideToggle();
