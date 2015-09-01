@@ -1,6 +1,3 @@
-## To-Do
-* Exercise: Use markers, circles and polygons to replicate data set?
-
 ## Leaflet and Map APIs
 * Examine the value of mapping in modern-day web development.
 * Compare and contrast popular mapping APIs.
@@ -11,36 +8,58 @@
   * Handle events on a map
 * Explain what geoJSON is and how map apis like leaflet utilize it.
 
-## Why Are We Having A Class on Maps?
+## Why Are We Having A Class on Maps? (5)
 
-Location-based apps have and continue to be the rave.
-* Some of you have already incorporated map APIs into your WDI projects.
+It's no secret you can do some seriously cool stuff with maps online. Some examples...
+* [Map with Curved Lines](http://www.amcharts.com/demos/map-with-curved-lines/)
+* [Google's Project Sunroof](https://www.google.com/get/sunroof#a=112%20Stanley%20St%2C%20Redwood%20City%2C%20CA%2094062%2C%20USA&b=125&f=lease&np=18&p=1&sh=1)
+* Do you guys have any examples?
 
-## A History of Maps Online
+We can do crazy, radically-different cool things with maps. But at the core of all these examples is geographical data.
+* In its most basic form, latitude-longitude.
+* While we're going to keep things simple today, soon enough you'll be able to work some crazy map wizardy with nothing more than geographical data and javascript.
 
-* 2006: Google Maps
-* 2006: Google Maps API
+## A History of Maps Online (5)
 
-## What is Leaflet?
+We haven't always had access to mapping data like we do now.
+
+1996: Mapquest  
+* Automatically-generated driving directions! Magic!
+* Major consumer-facing use of mapping data.
+* [Still in business...](http://www.mapquest.com/)
+
+2005: Google Maps & API  
+* Users can interact with a full-fledged map of the world.
+* That same year, and perhaps most importantly for developers, Google released a Maps API.
+  * Not only was there this massive trove of mapping data, but now developers could interact with it. On external websites, at that.
+  * Motivated in part by other sites that reverse engineered Google Maps, like [Chicago Crime](http://www.holovaty.com/writing/chicagocrime.org-tribute/) and [Housing Maps](http://www.housingmaps.com/).
+* The most heavily-used API on the web.
+
+## What is Leaflet? (5)
 
 > [Leaflet](http://leafletjs.com/) is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 33 KB of JS, it has all the mapping features most developers ever need.
 
-Leaflet is a Javascript library, created by [Mapbox](https://www.mapbox.com/), thats allows us to create an render interactive maps in the browser.
-* Pulls map information from [OpenStreetMap](https://www.openstreetmap.org/), an open source map database.
+Leaflet is a Javascript library thats allows us to create and render interactive maps in the browser.
+* Usually used in tandem with [Mapbox](http://mapbox.com), a popular map provider that contributes a lot to open source mapping libraries.
+  * Powered by OpenStreetMap, an open source map mapping database.
+  * In turn, powers Foursquare, Uber and other major services.
+  * They're also DC-based!
 * Allows us create the same type of objects you see in Google Maps (e.g., markers, routes, polygons).
 * We can use Javascript events to add interactivity to a Leaflet map.
 
-## Setup
+Why Leaflet?
+* Intuitive, easy-to-use Javascript library.
+* Lightweight, no-frills library.
+  * Can add to functionality using [plug-ins](http://mapbbcode.org/leaflet.html).
+* Cheaper. If your map application ends up making a lot of API requests, Leaflet / Mapbox is a cheaper alternative to Google Maps.
+* Still, encourage you to check out the [Google Maps API](https://developers.google.com/maps/documentation/javascript/libraries).
 
-### Create files
+## Setup (5)
 
-Create a `map` directory in your in-class directory. From there...
+### Quick Start
 
-```
-$ touch index.html
-$ touch style.css
-$ touch app.js
-```
+[Clone this repo.](https://github.com/ga-dc/mapping-inclass)
+* Just contains some empty HTML, CSS and JS files.
 
 ### Link to the Leaflet stylesheet
 
@@ -84,7 +103,7 @@ $ touch app.js
 }
 ```
 
-### Sign up for Mapbox / Leaflet
+### Sign up for Mapbox / Leaflet (5)
 
 [Sign up for an account at Mapbox](https://www.mapbox.com/)
 
@@ -100,7 +119,7 @@ Then, click on your username/avatar in the navbar.
 
 ## Create a Map
 
-### An Empty Map
+### An Empty Map (5)
 
 ```js
 // app.js
@@ -116,11 +135,17 @@ var map = L.map('map').setView([38.9038829, -77.0360032], 15);
   1. An array containing the latitude and longitude coordinates of the center of your map.
   2. The starting zoom level of your map.
 
+Need help getting coordinates? [Get some here](http://itouchmap.com/latlong.html)!
+
 When your map declaration is set up, you should see something like this...
 
 !["empty map"](img/empty-map.png)
 
-### Add Tiling
+Technically, there is a map here.
+* If we fed in some latitude-longitude coordinates and rendered a marker, it would appear.
+* But an invisible map doesn't really help us. That's where tiling comes in...
+
+### Add Tiling (5)
 
 Our map won't do much good without tiling (i.e., the map itself). We can add tiling using Leaflet's `.tileLayer` method. Enter this below your `L.map().setView()` method.
 * Make sure to fill in `id` and `accessToken` with the **Map ID** and **Default Public Token** values you saved earlier.
@@ -142,7 +167,11 @@ You should see something like this...
 
 **BOOM**, we've got a map! Now let's do something with it.
 
-## Map Markers & Shapes
+**Note:** The above tiling isn't the only one we can use.
+* In fact, Mapbox isn't the only provider of Leaflet map tiling.
+* Check out [this gist](https://gist.github.com/mourner/1804938), which contains tiling links for a number of different map tiles like `OpenCycleMap`.
+
+## Map Markers (5)
 
 Add a marker to your map using the `L.marker` method.
 * Takes an array of latitude and longitude as an argument.
@@ -152,6 +181,17 @@ Add a marker to your map using the `L.marker` method.
 // `map` is the variable we originally saved our map to.
 var generalAssembly = L.marker( [38.9048542, -77.0339403] ).addTo( map );
 ```
+
+### You Do: Make Some Markers
+
+Make five markers!
+* Use the same Leaflet syntax we just used in the class.
+* **BUT**, you must use a loop or enumerator to create and render these markers.
+* Use whatever container you want (e.g., array, object) to pass in coordinates to your loop.
+
+## Shapes
+
+Pick out five coordinates and use a loop to generate marker for each of them.
 
 You can also use a circle to cover a portion of a map using `L.circle()` and `.addTo( map )`. Takes three arguments...
   1. Latitude/longitude array.
@@ -182,9 +222,11 @@ var washington = L.polygon([
 ]).addTo(map);
 ```
 
-**[EXERCISE OPPORTUNITY?: Markers, Circles, Polygons]**
+### You Do: Markers to Shapes (10)
 
-## Map Pop-Ups
+Modify the previous exercise so that it generates a polygon whose corners are the same five map markers.
+
+## Map Pop-Ups (5)
 
 Say you look up a restaurant on Google Maps. When you click on its marker, you would expect to see some helpful information like address, operating hours, or something.
 * Let's create a simple version of that using Leaflet's Pop-Up feature.
@@ -204,7 +246,7 @@ generalAssembly.bindPopup(
 )
 ```
 
-## Events
+## Events (15)
 
 Pop-ups are cool, but they're not enough. We want to be able to interact with our map and make use of the information that comes with it. **Enter events!**  
 * The great thing about Leaflet events is that we can use the Javascript skills we learned at the start of WDI.
@@ -220,8 +262,6 @@ map.on( "click", function( event ){
 ```
 
 Let's look at that event response in the console. What do you see in there?
-* Latitude and longitude.
-* **[HIGHLIGHT OTHER USEFUL INFORMATION]**
 
 !["click console result"](img/click-console.png)
 
@@ -241,8 +281,6 @@ map.on( "click", function( event ){
 })
 ```
 
-**[EXERCISE/MINI-LAB OPPORTUNITY: Create list of prompts that use event responses in different ways. Have them work in pairs.]**
-
 Check out Leaflet's [event documentation](http://leafletjs.com/reference.html#events) if you want to learn more.
 
 ## GeoJSON
@@ -254,7 +292,7 @@ Check out Leaflet's [event documentation](http://leafletjs.com/reference.html#ev
 GeoJSON is essentially a JSON object that contains a variety of information about a point or area (or a collection of the two) on a map.
 * With Leaflet, rather than hardcode information about a marker, circle or polygon into our code, we can import that geographical information using GeoJSON.
 
-### GeoJSON Components
+### GeoJSON Components (10)
 
 All GeoJSON objects must have a `type` value, which can equal a Geometry type, "Feature" or "FeatureCollection".
 * Geometry types
@@ -311,5 +349,28 @@ And we should see something like this...
 
 !["geojson monument trail"](img/geojson-monument-trail.png)
 
-**[EXERCISE/LAB OPPORTUNITY: Use GeoJSON to generate map components]**
+## Exercise: Using GeoJSON (10)
+
+Use a "Feature Collection" to recreate the markers and polygons you created in the two earlier exercises.
+* What exactly is a Feature Collection? An array of features.
+* Need help? Leaflet's [GeoJSON documentation](http://leafletjs.com/examples/geojson.html) will start you on the right path.
+
 * BONUS: Generate geographical information (e.g., lat/long using a 3rd-party API).
+
+## What's Next?
+
+We only scratched the surface during this class.
+* [Choropleth maps](http://leafletjs.com/examples/choropleth.html).
+
+## Homework: Leaflet & API's
+
+Steps
+* Create an HTML form. Users will use this form to enter an address.
+* Submitting this form should trigger an API call to Google Maps' Geocoder.
+  * The Geocoder will convert the submitted address to latitude-longitude coordinates.
+  * [Geocoder documentation](https://developers.google.com/maps/documentation/geocoding/intro).
+* Use Leaflet to...
+  * Convert coordinates to map markers.
+  * Click listeners for the markers that display the address and latitude-longitude coordinates.
+* Use Leaflet and GeoJSON to...
+  * Create a polygon that uses the aforementioned coordinates as corners.
