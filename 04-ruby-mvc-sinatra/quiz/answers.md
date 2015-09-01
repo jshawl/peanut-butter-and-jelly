@@ -70,8 +70,6 @@ end
 
 ### Say we have a Sinatra blog with a single Post model. What would be the ideal RESTful route for editing a post?
 
-**NOTE:** "Edit" returns a form but does not update the object. "Update" then takes the user input from the form and updates the object.
-
 ```rb
 # update
 put /students/:id do
