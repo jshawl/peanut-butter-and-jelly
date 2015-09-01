@@ -3,7 +3,7 @@
 ## Lemming Expletives
 - Describe what "pseudo" means in the context of CSS
 - Describe how to select even and odd elements on a page
-- Make a page multi-paginated without using Javascript
+- Make a page multi-paginated ? without using Javascript
 - Create custom radio buttons and drop-down menus using CSS
 
 ## Make CSS proud to be American
@@ -21,6 +21,8 @@ Well, what might you Google?
 ### In retrospect
 
 ...you should probably never actually make artwork in CSS. As you saw in the SASS lesson, [people *do*](http://www.bypeople.com/50-impressive-css-drawings/), but it's much more just for kicks than for any practical purpose.
+
+how does the above exercise tie into your lesson? Would like to see a softer transition / fleshed out a little more
 
 ## Pseudo-selectors
 
@@ -61,6 +63,8 @@ Pseudo-selectors all start with a colon. So if I wanted to select every `div` th
 - `:nth-child`
 - `:nth-of-last-child`
 
+maybe a you-do scavenger hunt here? break up into groups, research and demo within 5 mins.
+
 
 ##### pseudo-elements
 - `:after`
@@ -80,6 +84,8 @@ You can treat pseudo-selectors just like any other selector in that you can chai
 
 This will select every 3rd row. How? `n` represents the element's number of its particular type. For example:
 
+maybe point out here that before pseudo selectors were common, we had to use jQuery to do this sort of thing.
+
 ```html
 <tr><!-- I'm the 0th of my type. (3 * 0) + 3 is 3, so instead of me being selected, the 3rd <tr> is selected--></tr>
 <tr><!-- I'm the 1st of my type. (3 * 1) + 3 is 6, so instead of me being selected, the 6th <tr> is selected--></tr>
@@ -88,6 +94,8 @@ This will select every 3rd row. How? `n` represents the element's number of its 
 <tr></tr>
 <tr></tr>
 ```
+
+also https://css-tricks.com/examples/nth-child-tester/
 
 ## Forms
 
@@ -127,6 +135,7 @@ input[type=radio]:checked+label{
 Why go to all that trouble on the radio button?
 
 I'd use `display:none`, but in some (dumb) browsers, display:none means the element isn't included in form submissions.
+whoah, didn't know that! 
 
 ### Drop-downs
 
@@ -182,6 +191,8 @@ The HTML is a bunch of radio buttons with labels, but you can use CSS to make th
 }
 ```
 
+might be a good place for a you do, like - https://github.com/ga-dc/moonrise_kingdom
+
 ## Pagination
 
 We've used some Javascript to make single-page apps appear to have multiple views. But you can do the same thing with the `:target` selector in CSS.
@@ -189,7 +200,8 @@ We've used some Javascript to make single-page apps appear to have multiple view
 You've probably seen URLs like this:
 
 ```
-http://something.com/index.html#aboutMe
+http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array/17782979#17782979
+or any example that demos it
 ```
 
 The `#` at the end indicates an anchor (or jump-tag, or jump-to). The browser is going to look for an element with the ID of `aboutMe`, and if it exists, it'll try to scroll to that element such that it's aligned with the top of the screen. If you click on a jump-tag referencing an element on the current page, it will *not* reload the page. This is handy for jumping around sections. (See any Github readme.)
@@ -238,6 +250,9 @@ With the person at your table, write out *in English* what each of the following
 
 ## Continue working on your portfolio page
 
+Try using a pseudo class or pseudo element to style the first letter or build a fancy
+navigation menu that behaves like radio buttons.
+
 If you're certain you don't have more you'd like to add to it, let your instructor know!
 
 ## (For those letting the instructor know)
@@ -248,3 +263,10 @@ If you're certain you don't have more you'd like to add to it, let your instruct
 - Create starter code. This should be enough that students have an idea of where to start. If there's a lot of "busywork" that they need to do (e.g. doing `npm init` or `bower install bootstrap-sass`) maybe do that for them.
 - Create a `readme.md` file. Anticipate questions students may have about the prompt and try to address those.
 - Push it to **your** Github. Share your exercise with `/r/web_design` or `/r/programming`!
+cool you-do!
+
+Overall, lesson plan looks good!
+I recommend revisiting the clearfix w/ pseudo elements
+also here's a blog post I wrote with some cool applications - https://jesse.sh/practical-pseudo-elements-classes/
+I recommend getting the students more involved when possible, and throwing in an exercise or two
+to practice throughout the day.
