@@ -13,7 +13,7 @@
 It's no secret you can do some seriously cool stuff with maps online. Some examples...
 * [Map with Curved Lines](http://www.amcharts.com/demos/map-with-curved-lines/)
 * [Google's Project Sunroof](https://www.google.com/get/sunroof#a=112%20Stanley%20St%2C%20Redwood%20City%2C%20CA%2094062%2C%20USA&b=125&f=lease&np=18&p=1&sh=1)
-* Do you guys have any examples?
+* Do you all have any examples?
 
 We can do crazy, radically-different cool things with maps. But at the core of all these examples is geographical data.
 * In its most basic form, latitude-longitude.
@@ -34,6 +34,8 @@ We haven't always had access to mapping data like we do now.
   * Not only was there this massive trove of mapping data, but now developers could interact with it. On external websites, at that.
   * Motivated in part by other sites that reverse engineered Google Maps, like [Chicago Crime](http://www.holovaty.com/writing/chicagocrime.org-tribute/) and [Housing Maps](http://www.housingmaps.com/).
 * The most heavily-used API on the web.
+
+excellent framing additions here!
 
 ## What is Leaflet? (5)
 
@@ -60,6 +62,7 @@ Why Leaflet?
 
 [Clone this repo.](https://github.com/ga-dc/mapping-inclass)
 * Just contains some empty HTML, CSS and JS files.
+awesome :+1:
 
 ### Link to the Leaflet stylesheet
 
@@ -133,7 +136,7 @@ var map = L.map('map').setView([38.9038829, -77.0360032], 15);
 `.setView()`
 * This method takes two arguments...
   1. An array containing the latitude and longitude coordinates of the center of your map.
-  2. The starting zoom level of your map.
+  2. The starting zoom level of your map. what is the range of values? 0 - 15?
 
 Need help getting coordinates? [Get some here](http://itouchmap.com/latlong.html)!
 
@@ -145,13 +148,15 @@ Technically, there is a map here.
 * If we fed in some latitude-longitude coordinates and rendered a marker, it would appear.
 * But an invisible map doesn't really help us. That's where tiling comes in...
 
+>Q: What are the benefits of tiling? why not just load the whole map?
+
 ### Add Tiling (5)
 
 Our map won't do much good without tiling (i.e., the map itself). We can add tiling using Leaflet's `.tileLayer` method. Enter this below your `L.map().setView()` method.
 * Make sure to fill in `id` and `accessToken` with the **Map ID** and **Default Public Token** values you saved earlier.
 
 ```js
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', { //why is this access token ok here, but not other js access tokens?
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
 
@@ -164,6 +169,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 You should see something like this...
 
 !["DC map"](img/dc-map.png)
+really like your habit of creating solution images - might pick it up myself!
 
 **BOOM**, we've got a map! Now let's do something with it.
 
@@ -188,6 +194,10 @@ Make five markers!
 * Use the same Leaflet syntax we just used in the class.
 * **BUT**, you must use a loop or enumerator to create and render these markers.
 * Use whatever container you want (e.g., array, object) to pass in coordinates to your loop.
+
+Bonus!
+- Try writing a function that converts a place description like "General Assembly in DC" to
+  lat/long. http://geocoder.opencagedata.com/demo.html
 
 ## Shapes
 
@@ -232,6 +242,8 @@ Say you look up a restaurant on Google Maps. When you click on its marker, you w
 * Let's create a simple version of that using Leaflet's Pop-Up feature.
 * We can call the `.bindPopup()` method on the marker we already made.
 * If we want our pop-up to automatically render upon page load, we can append it with `.openPopup()`.
+
+not related to this content, but I have struggled with configuring the map itself, like scroll zoom and showing/hiding controls. maybe a link to configuration steps?
 
 ```js
 // Our marker
@@ -292,6 +304,8 @@ Check out Leaflet's [event documentation](http://leafletjs.com/reference.html#ev
 GeoJSON is essentially a JSON object that contains a variety of information about a point or area (or a collection of the two) on a map.
 * With Leaflet, rather than hardcode information about a marker, circle or polygon into our code, we can import that geographical information using GeoJSON.
 
+- github supports geojson! https://help.github.com/articles/mapping-geojson-files-on-github/
+
 ### GeoJSON Components (10)
 
 All GeoJSON objects must have a `type` value, which can equal a Geometry type, "Feature" or "FeatureCollection".
@@ -311,7 +325,7 @@ All GeoJSON objects must have a `type` value, which can equal a Geometry type, "
   * A collection of features. These are stored in a `features` property, which is an array of feature objects.
 
 Below is an example GeoJSON "feature".
-* **FYI:** The GeoJSON documentation is a great first place to look if you have any questions about syntax.
+* **FYI:** The [GeoJSON documentation](http://geojson.org/geojson-spec.html) is a great first place to look if you have any questions about syntax.
 * **Also FYI:** GeoJSON coordinates are written in the order of longitude then latitude.
   * Google Maps, for example, lists them in the reverse order, so keep that in mind when pulling coordinates from elsewhere.
 
@@ -349,6 +363,8 @@ And we should see something like this...
 
 !["geojson monument trail"](img/geojson-monument-trail.png)
 
+are there any geojson apis that have something interesting? maybe you could link to some geojson file and do something impressive!
+
 ## Exercise: Using GeoJSON (10)
 
 Use a "Feature Collection" to recreate the markers and polygons you created in the two earlier exercises.
@@ -364,6 +380,8 @@ We only scratched the surface during this class.
 
 ## Homework: Leaflet & API's
 
+maybe create a repo and provide solution branch? also dont forget to update homework.md
+
 Steps
 * Create an HTML form. Users will use this form to enter an address.
 * Submitting this form should trigger an API call to Google Maps' Geocoder.
@@ -374,3 +392,7 @@ Steps
   * Click listeners for the markers that display the address and latitude-longitude coordinates.
 * Use Leaflet and GeoJSON to...
   * Create a polygon that uses the aforementioned coordinates as corners.
+
+## Sample Quiz Questions
+
+or just closing questions to check for understanding.
