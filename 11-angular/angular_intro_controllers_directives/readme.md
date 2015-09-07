@@ -63,7 +63,7 @@ T&T - Some points to think about (5)
 - uses HTML as your template language and lets you extend HTML's syntax to express your application's functionality
 - allows you to utilize html attributes to add behavior through JS. (directives)
 - changes are reflected in various areas and persisted immediately without page refresh
-- it's weird, there'll be a lot of logic in the dom.
+- it's interesting, there'll be a lot of logic in the dom.
 
 ## Setup (5/40)
 Let's set up an angular environment
@@ -81,8 +81,8 @@ $ touch js/app.js
 Bower Installation:
 ```bash
 $ npm install -g bower
-$ bower install jquery
-$ bower install angular
+$ bower install --save jquery
+$ bower install --save angular
 ```
 
 > installing bower globally so that we can add this dependency to our system
@@ -108,6 +108,8 @@ $ bower install angular
 
 ## Creating angular app (5/45)
 We're going to add an immediately invoked function expression to instantiate our angular application. In `js/app.js`:
+
+why use an iife?
 
 ```js
 (function() {
@@ -145,7 +147,7 @@ Because we defined our ng-app we are able to use `{{}}` much in the same way we 
 
 ## Break (10/70)
 ## Angular controllers (10/80)
-It's not really enough just to basic JS expressions, that just like hardcoding values into the DOM. We're never really going to do this, but we will be using expressions to access objects. We can do this sort of behavior with controllers. Let's create the controller file `$ touch js/controllers/todos.js` and add the following code:
+It's not really enough just to use? basic JS expressions, that just like hardcoding values into the DOM. We're never really going to do this, but we will be using expressions to access objects. We can do this sort of behavior with controllers. Let's create the controller file `$ touch js/controllers/todos.js` and add the following code:
 
 ```js
 var app = angular.module("todo")
@@ -157,6 +159,7 @@ app.controller("todoController", function(){
     "Smell fish"
   ]
 })
+// do you need to update app.js and list `todoController` as a dependency now?
 ```
 
 > We've instantiated a controller on our main app. This is where all the logic will be contained. We'll be learning later this week how to fetch data from an external API, that behavior will belong in the controller. For now, we've hardcoded 4 strings as a property for the controller acting as our API fetch for our model. Our model is a todo string
@@ -178,6 +181,8 @@ In `index.html`:
   <p>{{todosCtrl.todos[0]}}</p>
 </div>
 ```
+
+right here would be a great time to mention why many tutorials use `$scope` and why we're not
 
 > we used the `ng-controller` directive here in order to instantiate our controller in the DOM. In the same way that `ng-app` established the domain of the js functionality in the html element, the `ng-controller` establishes the domain in this div. Another thing to note, is that we've created an instance of our controller definition which has access to all values and methods we defined in our controller in this domain. That instance is known as the "ViewModel".
 
@@ -246,6 +251,9 @@ We now need to link `.formIsVisible` to an actual form. We can do this by utiliz
 
 > ---- talk about 2 way data binding here? is this a form of 2 way data binding?
 
+next, add `ng-model="content"` to the input and `{{content}}` somewhere on the page to show how two way data binding is taking place.
+updating the form updates the model, and vice versa
+
 ## Create form - you do - grumble (25/150)
 1. Initialize a controller in the DOM
 2. add a property to the grumble controller that is a boolean value in the script file
@@ -269,6 +277,7 @@ In the past with OOJS or Backbone we generated a whole bunch of html through JS 
 <div ng-repeat="todo in todosCtrl.todos">
   <p>{{$index}}{{todo}}</p>
 </div>
+// point out that $index is special in ng-repeat
 ```
 
 > All we've done here, is print each todo with it coresponding index value.
@@ -301,8 +310,11 @@ Earlier, we added a property and function to our controller and used some angula
 
 > Note that we utilized a seemingly uninstantiated global variable `editTodo`. `ng-repeat`, however, establishes a scope for `editTodo`. If we utilized the same logic as the last time we did this behavior (ie using `todoCtrl.formIsVisible`) any time we click on one, all of the edit forms would open. Because we never instantiated editTodo it by default is undefined, which is falsey. So we use `!editTodo` so that we show them initially. We're using the scope of the `ng-repeat` to our advantage because there is a new scope for each iteration.
 
+nice
+
 ## `ng repeat` - you do - grumblr (20/35)
 - Display all of the hardcoded grumbles on to the screen using `ng-repeat`
+  - would be useful if we provide the hardcoded seeds or instructions to copy from api
 - Make sure that you display all of the information for each grumble(title, author name, content, photo url)
 - make sure each grumble has a toggleable edit form.
 
@@ -310,6 +322,8 @@ Earlier, we added a property and function to our controller and used some angula
 ViewModel is a model which has been tailored to support a specific UI, helping in easing data binding. In our case, when we did `ng-controller="todosController as todosCtrl"`, we're creating a new instance of our controller -- the View Model -- that is tailored to support our interface. In this way, we can use the View Model to access functions and properties we've defined in our controller. Everytime we load the DOM we create a new View Model based on the functionality defined in the controller.
 
 ## ng-model + break(40/80)
+
+i still think you can mention ng-model above, and then revisit it here
 We can utilize the view model in a variety of ways. We'll be using view model to leverage the angular directive `ng-model` to retreive and set data. We can actually just create properties on the view model to serve this end.
 
 We can see all of our todos, we can even toggle forms to create new ones and edit existing ones. Theres just one problem. We can't actually create or edit todos yet. We need a way to access the values of the input elements and call a function to create the Todo in the form. We'll be using `ng-model` and `ng-submit` to do these things. Let's get the functionality working for creating Todos. In `index.html`:
@@ -330,7 +344,7 @@ Let's define our `.create` function in the controller now. In `js/controllers/to
 
 ```js
 this.create = function(){
-  this.todos.unshift(this.content)
+  this.todos.unshift(this.content) // what is unshift?
 }
 ```
 
