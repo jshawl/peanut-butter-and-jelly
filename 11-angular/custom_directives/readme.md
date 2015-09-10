@@ -55,13 +55,14 @@ Ever wished there was a `<comment-box>` or a `<random-bill-murray-img>` element?
 
 One of Angular's sort-of "mission statements" is "to be what HTML would have been if it was designed from the start with web apps in mind."
 
-### Things that are weird about directives
+### Things that are unique about directives
 
 #### First: They're called "directives"
 
-This is a dumb name. If it was up to me, I'd call them "Angular elements" or something much more intuitive.
+If it was up to me, I'd call them "Angular elements" or something much more intuitive. Another common
+name for this sort of thing is "component"?
 
-In fact, I got so frustrated with Angular's goofy way of naming things that I created a [cheat sheet of which Angular terms map to which Rails terms](../angular-vs-rails.md).
+I created a [cheat sheet of which Angular terms map to which Rails terms](../angular-vs-rails.md).
 
 Directives are most like helpers in Rails.
 
@@ -73,9 +74,11 @@ Directives are most like helpers in Rails.
 
 They all add HTML to a view.
 
-#### Second: They don't validate :(
+#### Second: They don't validate ...yet!
 
 If you try to validate HTML with `<div ng-repeat>` in it, you'll get a big ol' error saying `ng-repeat` isn't an allowed attribute.
+
+there is a bigger issue here than html validation - SEO, accessibility, etc...
 
 This has an easy fix:
 
@@ -83,19 +86,21 @@ This has an easy fix:
 
 For example: `<data-comment>` or `<div data-ng-repeat>`. This is how you signal that you're aware you're using non-standard HTML and it isn't simply a typo.
 
-Angular can be very picky about whether or not you've properly nested and closed elements, so using `data-` is very helpful. (That said, we did *not* use `data-` in the Grumblr solutions. We also didn't use `<!DOCTYPE html>`. Sigh.)
+Angular can be very picky about whether or not you've properly nested and closed elements, so using `data-` is very helpful. (That said, we did *not* use `data-` in the Grumblr solutions. We also didn't use `<!DOCTYPE html>`.)
 
 #### Third: They're mixing logic with HTML
 
 That is: they do pretty much everything we've told you *not* to do with HTML. You're discouraged from using the `onclick=` attribute, and now all of a sudden you're being told to use `ng-click=`.
 
-##### A question to which I don't have a well-articulated answer: why is this good?
+##### A question : why is this good?
 
 I can think of a few reasons:
 
 1. We don't have to put event listeners everywhere
 - It makes the HTML easier to read, whereas in Backbone templates are sort of strewn about and it's not so easy to see which goes where
 - It makes the HTML make *more sense*, somehow. HTML is meant to tell you the function of content, and this lets you be much more specific about that function. It's (theoretically) easier to read than Javascript, and it's more useful than just defining semantics.
+
+##### Another Question: why is this bad?
 
 ### Custom directives are the "flagship" of Angular
 
@@ -106,6 +111,7 @@ So: let's make one!
 ```
 git checkout -b origin/templating-and-routing-with-comments templating-and-routing-with-comments
 ```
+make sure this branch lines up with your starter code
 
 ## Grumble `show`
 
@@ -118,6 +124,8 @@ For now, we'll leave `show` alone and just get this working in `index`.
 2. Cut and paste the relevant HTML into it from `index.html`.
 
 3. Where the HTML used to be in `index.html`, put the custom directive. We'll call this one plain ol' `<grumble />`, although we could call it whatever we want. Make sure you name your directive something that isn't a variable on your page. That is: don't put `<comment>` inside `ng-repeat="grumble in grumbles"`.
+
+why #3?
 
 4. Now we'll give the directive its behavior. Let's make `js/directives/grumble.js`.
 
@@ -139,7 +147,7 @@ For now, we'll leave `show` alone and just get this working in `index`.
     var directives = angular.module('grumbleDirectives',[]);
     directives.directive('grumble', function(){
       return {
-        templateUrl: "views/grumbles/_grumble.html"
+        templateUrl: "views/grumbles/_grumble.html" // weve been putting our views in js/views/grumbles/
       }
     });
   })();
@@ -155,9 +163,16 @@ For now, we'll leave `show` alone and just get this working in `index`.
 git checkout -b origin/custom-directives custom-directives
 ```
 
+is the above git step necessary? won't that change the code they just wrote?
+
 ##### Swap out the HTML in `show.html` with the `<grumble />` directive.
 
 We've effectively created a little widget we can use anywhere on our app!
+
+>Q: What are other things in the wild you would create directives for?
+
+- date picker
+- etc..
 
 ##### Do the same for `edit` and `new`
 - What needs to change in the HTML of the partial for this to work?
@@ -178,6 +193,8 @@ I mentioned before that custom directives can be elements, attibutes, comments, 
 If you're looking for a mnemonic by which to remember these, use `MACE`, where `M` is the 'm' in 'comment'.
 
 If you only want your directive to be available as an element or an attribute, you'd add `restrict: 'EA'` to your directive:
+
+what is e? what is a?
 
 ```js
 (function(){
@@ -200,7 +217,7 @@ We've been having our directives load their HTML from another file. But you can 
   var directives = angular.module('grumbleDirectives',[]);
   directives.directive('grumble', function(){
     return {
-      template: "<h1>{{grumble.title}}</h1>"
+      template: "<h1>{{grumble.title}}</h1>" //maybe start with this one? is easier to test, fewer potential problems
     }
   });
 })();
@@ -294,6 +311,8 @@ You can give a directive its own methods and properties that will show up in the
 
 `link` will always take the same three arguments: `scope`, `element`, and `attributes`. The only one you really need to worry about is `scope`. It's an object that when you attach things to it makes them available inside your directive.
 
+documentation / reference link?
+
 This is a **big deal**. It means **we don't have to use controllers at all for this directive**.
 
 In the `grumble` controller, we have this method:
@@ -329,7 +348,7 @@ I can remove it from the controller and plunk it right in the directive:
 
 ## We've covered four "options":
 
-- `restrict: "EACM"`
+- `restrict: "EACM"` // would be useful to see what each letter means here
 - `replace`
 - `template` and `templateUrl`
 - `link`
@@ -362,7 +381,7 @@ Unlike, say, Rails, which was written with pretty explicit rules in mind, Angula
 
 There are lots of choices you have to make *for which there aren't "right" answers*, and that have no bearing on the performance of your app whatsoever:
 
-##### What are some of these choices that don't have right answers?
+##### What are some of these choices that don't have right answers... yet?
 
 - Put methods in directives or controllers?
 - Use directives as elements or attributes?
@@ -370,7 +389,7 @@ There are lots of choices you have to make *for which there aren't "right" answe
 - Use `<data-grumble>` or `<grumble>`?
 - Use a CDN or Bower?
 - More or fewer files?
-  - We put all of the controllers in one big file, but could totally have put them in separate files.
+  - We put all of the controllers in one big file, but could totally have put them in separate files. (why didnt we then? - http requests / familiarity w/ rails)
   ```js
   // grumbleDirective.js
   angular.module('grumblr').directive('grumble')...
@@ -426,4 +445,11 @@ There's as much a right answer to these as there is to:
 - Atom or SublimeText?
 
 **The only answer is to pick the one you like the best and stick with it.**
+
+Would be useful to see some industry discussion of this as well.
+
+- http://toddmotto.com/
+- https://egghead.io/series/angularjs-application-architecture
+- https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+- http://www.johnpapa.net/angular-app-structuring-guidelines/
 
