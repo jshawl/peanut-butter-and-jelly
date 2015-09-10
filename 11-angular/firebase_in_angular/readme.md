@@ -11,12 +11,18 @@
 
 You've heard that there are database options, other than Postgresql.  Today, we'll investigate one, Firebase.
 
+Firebase is a Platform as a Service that provides a graphical interface to set up a back end.
+
 ### Websockets
 
 http -> Websockets
 send letter -> phone
 
 ??? Diagram
+
+![](http://www.pubnub.com/blog/wp-content/uploads/2014/09/WebSockets-Diagram.png)
+
+pub/sub model vs traditional http request/response model.
 
 ## Exercise: Your own Firebase (20 min)
 
@@ -32,11 +38,13 @@ Deliverable: a database, with specified objects, using GUI
 
 ## Demo: Tetris
 
-
+or https://www.chrome.com/racer - uses phones to control cars on racetrack
 
 ## Exercise: Read/Write data (20 min)
 
 basic index.html/app.js, write/read
+
+A solution code snippet here would be useful
 
 https://www.firebase.com/docs/web/quickstart.html
 
@@ -63,6 +71,8 @@ Let's use our new found knowledge to update Grumbler.  This will be a walk throu
 ```
 $ git checkout -b templating-and-routing-with-comments origin/templating-and-routing-with-comments
 ```
+
+nice
 
 Big picture:
 - install & require dependencies
@@ -158,13 +168,17 @@ To manage a list of grumblers, we'll need an Array.
 
 #### Research: [Synchronized Arrays](https://www.firebase.com/docs/web/libraries/angular/guide/synchronized-arrays.html)
 
+nice. really liking the progression here
+
 
 ### Grumble.query()
 
 ```js
 grumbleServices.factory('GrumbleFirebase', ['$firebaseObject','$firebaseArray', grumbleFirebase]);
 
-// Manages resources in friebase
+any reason factory name is `GrumbleFirebase` and not `Grumble` 2 lines above?
+
+// Manages resources in firebase
 // mirrors ngResource interface
 function grumbleFirebase($firebaseObject, $firebaseArray) {
   // get reference to grumbles "namespace"
@@ -173,7 +187,7 @@ function grumbleFirebase($firebaseObject, $firebaseArray) {
   // retrieve our grumbles
   var grumbles = $firebaseArray(grumblesRef);
 
-  // mirror ngResource interface
+  // mirror ngResource interface :+1:
   var Grumble = {
     query: function(){ return grumbles; },
   }
@@ -258,7 +272,7 @@ And here's why they pay me the big bucks.
 
 ```js
 var list = $firebaseArray(ref);
-list.$add({ foo: "bar" }).then(function(ref) {
+list.$add({ foo: "bar" }).then(function(ref) { // avoid foo:bar if possible
   var id = ref.key();
   console.log("added record with id " + id);
   list.$indexFor(id); // returns location in the array
@@ -266,6 +280,8 @@ list.$add({ foo: "bar" }).then(function(ref) {
 ```
 
 Oh.  It doesn't change the grumble that is passed in.  It resolves to a reference for the newly added record.  We could return the new key, but we would have to change the Controller to support that.  The Controller expects a grumbler.  Let's send back a grumbler with an `id`.
+
+Documentation link - https://www.firebase.com/docs/web/api/datasnapshot/
 
 ```
 // WORKAROUND: this is the original Grumbler, with it's new id.
@@ -292,8 +308,6 @@ Q. What's wrong?
 Workaround.  Check via index for now.  Ah, that looks much better.  But wait!  Look at those links.  Where's the id?
 
 ### Update the links on the index view.
-
-Seriously?  This is why they pay us to do this.  And.. this is the point where you realize why you took this course.
 
 Remember back when we researched [Synchronized Arrays](https://www.firebase.com/docs/web/libraries/angular/guide/synchronized-arrays.html)?  In there they mentioned,
 > We can also access an item's id in ng-repeat with $id.
@@ -345,3 +359,9 @@ Hints:
 - https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-42/q1_2015_img1.png
 - [Simple (ruby) Server](http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/)
 - https://www.firebase.com/tutorial/#session/gf3bu09wvlf
+
+Overall, looks great!
+
+based on yesterday's lesson, i have a feeling you'll have less time than you need for this lesson.
+I recommend moving quicker through the websockets / testing firebase activities and spend more time
+workin on grumblr application so students can feel the progress they are making.
